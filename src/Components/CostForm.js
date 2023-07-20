@@ -15,49 +15,69 @@ const CostForm = () => {
     // const dispatch = useDispatch();
 
     const {
-			value: nameValue,
-			isValid: nameIsValid,
-			hasError: nameHasError,
-			inputChangeHandler: nameChangeHandler,
-			inputBlurHandler: nameBlurHandler,
-			reset: nameReset,
+		value: nameValue,
+		isValid: nameIsValid,
+		hasError: nameHasError,
+		inputChangeHandler: nameChangeHandler,
+		inputBlurHandler: nameBlurHandler,
+		reset: nameReset,
 		} = useInput(isNotEmpty);
 
-		const {
-			value: emailValue,
-			isValid: emailIsValid,
-			hasError: emailHasError,
-			inputChangeHandler: emailChangeHandler,
-			inputBlurHandler: emailBlurHandler,
-			reset: emailReset,
+	const {
+		value: emailValue,
+		isValid: emailIsValid,
+		hasError: emailHasError,
+		inputChangeHandler: emailChangeHandler,
+		inputBlurHandler: emailBlurHandler,
+		reset: emailReset,
 		} = useInput(isEmail);
 
-		useEffect(() => {
-			if (nameIsValid && emailIsValid) {
-				setFormValid(true);
-			}
-			return () => setFormValid(false);
-		}, [nameIsValid, emailIsValid]);
+	const {
+		value: dateValue,
+		isValid: dateIsValid,
+		hasError: dateHasError,
+		inputChangeHandler: dateChangeHandler,
+		inputBlurHandler: dateBlurHandler,
+		reset: dateReset,
+	} = useInput(isNotEmpty);
 
-		const submitHandler = (event) => {
-			event.preventDefault();
+	const {
+		value: descriptionValue,
+		isValid: descriptionIsValid,
+		hasError: descriptionHasError,
+		inputChangeHandler: descriptionChangeHandler,
+		inputBlurHandler: descriptionBlurHandler,
+		reset: descriptionReset,
+	} = useInput(isNotEmpty);
 
-			if (!formValid) {
-				nameBlurHandler();
-				emailBlurHandler();
-				return;
-			}
+	useEffect(() => {
+		if (nameIsValid && emailIsValid && dateIsValid && descriptionIsValid) {
+			setFormValid(true);
+		}
+		return () => setFormValid(false);
+	}, [nameIsValid, emailIsValid, dateIsValid, descriptionIsValid]);
 
-			nameReset();
-			emailReset();
-			// dispatch(volunteerFormActions.reset());
-		// 	send(dispatch, {
-		// 		name: nameValue,
-		// 		email: emailValue,
-		// 		phone: phoneNr,
-		// 		message,
-		// 	});
-		};
+	const submitHandler = (event) => {
+		event.preventDefault();
+
+		if (!formValid) {
+			nameBlurHandler();
+			emailBlurHandler();
+			return;
+		}
+
+		nameReset();
+		emailReset();
+		dateReset();
+		descriptionReset();
+		// dispatch(volunteerFormActions.reset());
+	// 	send(dispatch, {
+	// 		name: nameValue,
+	// 		email: emailValue,
+	// 		phone: phoneNr,
+	// 		message,
+	// 	});
+	};
 
 
 		const nameClassNames = `${classes.formInput} ${
@@ -65,6 +85,12 @@ const CostForm = () => {
 		}`;
 		const emailClassNames = `${classes.formInput} ${
 			emailHasError && classes.formInputInvalid
+		}`;
+		const dateClassNames = `${classes.formInput} ${
+			dateHasError && classes.formInputInvalid
+		}`;
+		const descriptionClassNames = `${classes.formInput} ${
+			descriptionHasError && classes.formInputInvalid
 		}`;
 
 	return (
@@ -119,6 +145,59 @@ const CostForm = () => {
 							}
 						>
 							Please provide your email address.
+						</div>
+					</fieldset>
+					<fieldset>
+						<h2>Expenses</h2>
+						<p className={classes.labelSubText}>
+							You can submit any number of receipts and sum them up in one Expense Form, but please
+							collect different purposes into separate submissions, to help making our bookkeeping transparent.
+						</p>
+						<label htmlFor="date" className={classes.labelText}>
+							Date of expense (on receipt) *
+						</label>
+						<p className={classes.labelSubText}>
+							If you have many receipts, then use the date from the latest. If they relate to multiple years, then it 
+							is best to group them by years into separate submissions to help our bookkeeping.
+						</p>
+						<input
+							id="date"
+							type="date"
+							name="date"
+							className={dateClassNames}
+							onChange={dateChangeHandler}
+							onBlur={dateBlurHandler}
+							value={dateValue}
+						/>
+						<div
+							className={
+								dateHasError ? classes.feedbackInvalid : classes.feedbackValid
+							}
+						>
+							Invalid date.
+						</div>
+
+						<label htmlFor="description" className={classes.labelText}>
+							Description *
+						</label>
+						<p className={classes.labelSubText}>
+							Short title for the expense.
+						</p>
+						<input
+							id="description"
+							type="text"
+							name="description"
+							className={descriptionClassNames}
+							onChange={descriptionChangeHandler}
+							onBlur={descriptionBlurHandler}
+							value={descriptionValue}
+						/>
+						<div
+							className={
+								descriptionHasError ? classes.feedbackInvalid : classes.feedbackValid
+							}
+						>
+							Please provide a title.
 						</div>
 					</fieldset>
 
