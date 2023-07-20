@@ -1,0 +1,21 @@
+.button {
+    display: inline-block;
+    padding: .55rem 1.4rem;
+    font-family: Helvetica, Arial, sans-serif;
+    font-weight: var(--button-font-weight);
+}
+
+.button:hover {
+    cursor: pointer;
+    background-color: var(--primary-hover-color);
+}
+
+.general {
+    color: var(--invert-text-color);
+    background-color: var(--button-color);
+    border-color: var(--button-border-color);
+}
+
+.general:hover {
+    background-color: var(--button-hover-color);
+}

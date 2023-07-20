@@ -1,13 +1,139 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* Google Fonts  */
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@500&family=Quicksand:wght@400;700&display=swap');
+
+
+/* --------------- RESET ------------- */
+
+html, 
+body, 
+header, 
+footer, 
+section, 
+article, 
+h1, 
+h2, 
+h3, 
+p, 
+a, 
+button, 
+ul, 
+address, 
+svg,
+input,
+textarea {
+    margin: 0;
+    border: 0;
+    padding: 0;
+    font: inherit;
+    color: inherit;
+    background: transparent;
+    text-decoration: none;
+    box-sizing: border-box;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+li {
+    list-style: none;
+}
+
+/* --------------- DEFAULTS ------------- */
+
+:root {
+
+    --main-title-color: rgb(34, 34, 34);
+    --main-text-color: rgb(85, 85, 85);
+    --line-color: rgb(204, 204, 204);
+    --label-text-color: #555555;
+    --main-bg-color: rgb(255, 255, 255);
+    --input-border-color: #e1e1e1;
+    --input-bg-color: #fcfcfc;
+    --input-text-color: #919191;
+    --primary-color: #006a9f;
+    --button-color: rgb(54, 104, 151);
+    --button-border-color: rgb(20, 71, 117);
+    --button-hover-color: #3d71a1;
+    --invert-text-color: white;
+
+    --main-font-family: "Quicksand";
+    --main-title-font-family: "Josefin Sans";
+    --body-font-weight: 400;
+    --strong-font-weight: 700;
+    --button-font-weight: 600;
+
+    --body-font-size: 1rem;
+    --main-title-font-size: 1.3rem;
+    --subtitle-font-size: 1.1rem;
+}
+
+
+@media (prefers-color-scheme: dark) {
+    :root {
+      --main-title-color: rgb(255, 255, 255);
+      --main-bg-color: rgb(85, 85, 85);
+      --main-text-color: rgb(255, 255, 255);
+    }
+}
+
+body {
+    color: var(--main-text-color);
+    font-family: var(--main-font-family);
+    font-size: var(--body-font-size);
+    font-weight: var(--body-font-weight);
+    background-color: var(--main-bg-color);
+
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+header {
+    height: 80px;
+    background-color: var(--primary-color);
+    display: flex;
+    justify-content: space-between;
+    padding: 0 30px;
+}
+
+
+h1 {
+    font-family: var(--main-title-font-family);
+    font-size: var(--main-title-font-size);
+    color: var(--main-title-color);
+    text-transform: uppercase;
+    padding: 2rem 0;
+}
+
+h2 {
+    font-family: var(--main-title-font-family);
+    font-size: var(--subtitle-font-size);
+    font-weight: var(--main-title-font-weight);
+    color: var(--main-title-color);
+    text-transform: uppercase;
+    padding-bottom: .5rem;
+    margin-bottom: 2rem;
+    
+    border-bottom: 1px solid var(--line-color);
+    /* text-align: left; */
+}
+
+fieldset {
+    border-width: 1px;
+    border: none;
+    padding: 0;
+}
+
+
+input:-internal-autofill-selected {
+    /* background-color: var(--body-bg-color) !important;
+    color: var(--primary-color) !important; */
+}
+
+input[type="text"] {
+    -webkit-appearance: none;
+    outline: none;
+    font-family: Helvetica, Arial, sans-serif;
 }
