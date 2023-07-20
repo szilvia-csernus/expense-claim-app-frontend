@@ -135,7 +135,10 @@ input[type="text"] {
     font-family: Helvetica, Arial, sans-serif;
 }
 
-input[type="file" i] {
-    align-items: center !important;
-    text-align: center !important;
+input[type="file"] {
+    padding: 8px 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

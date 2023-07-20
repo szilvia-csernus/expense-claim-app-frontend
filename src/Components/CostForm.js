@@ -395,6 +395,7 @@ const CostForm = () => {
 							onBlur={receiptsBlurHandler}
 							value={receiptsValue}
 						/>
+						
 						<div
 							className={
 								receiptsHasError
@@ -456,7 +457,9 @@ const CostForm = () => {
 						/>
 						<div
 							className={
-								accountNameHasError ? classes.feedbackInvalid : classes.feedbackValid
+								accountNameHasError
+									? classes.feedbackInvalid
+									: classes.feedbackValid
 							}
 						>
 							Invalid name.

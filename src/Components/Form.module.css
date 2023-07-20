@@ -57,6 +57,19 @@
     border-style: dashed;
 }
 
+.fileInputField::-webkit-file-upload-button {
+    display: inline-block;
+    padding: .55rem 1.4rem;
+    font-size: var(--body-font-size);
+    font-family: Helvetica, Arial, sans-serif;
+    font-weight: var(--body-font-weight);
+    color: var(--invert-text-color);
+    background-color: var(--button-color);
+    border: none;
+}
+
+.fileInputField::-webkit-input-placeholder
+
 .footer {
     display: flex;
     justify-content: flex-start;
