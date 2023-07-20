@@ -52,6 +52,11 @@
     visibility: hidden;
 }
 
+.fileInputField {
+    height: 120px;
+    border-style: dashed;
+}
+
 .footer {
     display: flex;
     justify-content: flex-start;
