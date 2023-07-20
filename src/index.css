@@ -127,13 +127,13 @@ fieldset {
 }
 
 
-input:-internal-autofill-selected {
-    /* background-color: var(--body-bg-color) !important;
-    color: var(--primary-color) !important; */
-}
+/* input:-internal-autofill-selected {
+    background-color: var(--body-bg-color) !important;
+    color: var(--primary-color) !important;
+} */
 
 input[type="text"] {
-    -webkit-appearance: none;
+    --webkit-appearance: none;
     outline: none;
     font-family: Helvetica, Arial, sans-serif;
 }
