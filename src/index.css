@@ -73,9 +73,12 @@ li {
 
 @media (prefers-color-scheme: dark) {
     :root {
-      --main-title-color: rgb(255, 255, 255);
-      --main-bg-color: rgb(85, 85, 85);
-      --main-text-color: rgb(255, 255, 255);
+        --main-title-color: rgb(255, 255, 255);
+        --main-bg-color: rgb(59, 59, 59);
+        --main-text-color: rgb(255, 255, 255);
+        --label-text-color: white;
+        --input-bg-color: rgb(85, 85, 85);;
+        --input-text-color: white;
     }
 }
 
@@ -95,7 +98,7 @@ header {
     background-color: var(--primary-color);
     display: flex;
     justify-content: space-between;
-    padding: 0 30px;
+    padding: 0 2rem 0 10px;
 }
 
 
@@ -125,12 +128,6 @@ fieldset {
     border: none;
     padding: 0;
 }
-
-
-/* input:-internal-autofill-selected {
-    background-color: var(--body-bg-color) !important;
-    color: var(--primary-color) !important;
-} */
 
 input[type="text"] {
     --webkit-appearance: none;
