@@ -1,10 +1,10 @@
 import classes from './Form.module.css';
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import useInput from '../Hooks/use-input';
 import { ButtonGeneral } from './Buttons';
-// import { useDispatch } from 'react-redux';
-// import { send } from '../store/form-action-creator';
+import { useDispatch } from 'react-redux';
+import { send } from '../store/form-action-creator';
 
 const isNotEmpty = (value) => value.trim() !== '';
 const isEmail = (value) =>
@@ -13,7 +13,8 @@ const noValidate = (value) => true;
 
 const CostForm = () => {
     const [formValid, setFormValid] = useState(false);
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
+	const formRef = useRef(null);
 
     const {
 		value: nameValue,
@@ -146,13 +147,19 @@ const CostForm = () => {
 		ibanReset();
 		accountNameReset();
 
-		// dispatch(volunteerFormActions.reset());
-	// 	send(dispatch, {
-	// 		name: nameValue,
-	// 		email: emailValue,
-	// 		phone: phoneNr,
-	// 		message,
-	// 	});
+		send(dispatch, formRef.current
+		// 	{
+		// 	name: nameValue,
+		// 	email: emailValue,
+		// 	date: dateValue,
+		// 	description: descriptionValue,
+		// 	purpose: purposeValue,
+		// 	total: totalValue,
+		// 	receipts: receiptsValue,
+		// 	iban: ibanValue,
+		// 	accountName: accountNameValue,
+		// }
+		);
 	};
 
 
@@ -180,7 +187,7 @@ const CostForm = () => {
 		<section className={classes.content}>
 			<h1 className={classes.header}>Redeemer Delft Expense Form</h1>
 			<div className={classes.body}>
-				<form className={classes.form} onSubmit={submitHandler}>
+				<form className={classes.form} ref={formRef} onSubmit={submitHandler}>
 					{/* PERSONAL INFORMATION */}
 					<fieldset>
 						<h2>Personal Information</h2>
