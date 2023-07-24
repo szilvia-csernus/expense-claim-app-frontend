@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "/expense-reimbursement/static/css/main.12da4511.css",
-    "main.js": "/expense-reimbursement/static/js/main.bc17ca0c.js",
-    "index.html": "/expense-reimbursement/index.html",
-    "main.12da4511.css.map": "/expense-reimbursement/static/css/main.12da4511.css.map",
-    "main.bc17ca0c.js.map": "/expense-reimbursement/static/js/main.bc17ca0c.js.map"
+    "main.css": "/expense-claim-app/static/css/main.12da4511.css",
+    "main.js": "/expense-claim-app/static/js/main.bc17ca0c.js",
+    "index.html": "/expense-claim-app/index.html",
+    "main.12da4511.css.map": "/expense-claim-app/static/css/main.12da4511.css.map",
+    "main.bc17ca0c.js.map": "/expense-claim-app/static/js/main.bc17ca0c.js.map"
   },
   "entrypoints": [
     "static/css/main.12da4511.css",
