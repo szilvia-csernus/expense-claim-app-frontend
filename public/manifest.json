@@ -1,58 +1,71 @@
 {
-	"short_name": "Redeemer - Cost Claim",
-	"name": "Redeemer - Expense Reimbursement",
-	"description": "Expense Reimbursement for Redeemer Church, Rotterdam, NL",
-	"lang": "en-US",
-	"icons": [
-		{
-			"src": "icon-48x48.png",
-			"type": "image/png",
-			"sizes": "48x48"
-		},
-		{
-			"src": "icon-72x72.png",
-			"type": "image/png",
-			"sizes": "72x72"
-		},
-		{
-			"src": "icon-96x96.png",
-			"type": "image/png",
-			"sizes": "96x96"
-		},
-		{
-			"src": "icon-128x128.png",
-			"type": "image/png",
-			"sizes": "128x128"
-		},
-		{
-			"src": "icon-144x144.png",
-			"type": "image/png",
-			"sizes": "144x144"
-		},
-		{
-			"src": "icon-152x152.png",
-			"type": "image/png",
-			"sizes": "152x152"
-		},
-		{
-			"src": "icon-48x48.png",
-			"type": "image/png",
-			"sizes": "48x48"
-		},
-		{
-			"src": "icon-192x192.png",
-			"type": "image/png",
-			"sizes": "192x192"
-		},
-		{
-			"src": "icon-512x512.png",
-			"type": "image/png",
-			"sizes": "512x512"
-		}
-	],
-	"start_url": ".",
-	"display": "standalone",
-	"orientation": "portrait",
-	"theme_color": "#000000",
-	"background_color": "#ffffff"
+    "short_name": "Redeemer - Cost Claim",
+    "name": "Redeemer - Expense Reimbursement",
+    "description": "Expense Reimbursement for Redeemer Church, Rotterdam, NL",
+    "lang": "en-US",
+    "icons": [
+        {
+            "src": "icon-48x48.png",
+            "type": "image/png",
+            "sizes": "48x48"
+        },
+        {
+            "src": "icon-72x72.png",
+            "type": "image/png",
+            "sizes": "72x72"
+        },
+        {
+            "src": "icon-96x96.png",
+            "type": "image/png",
+            "sizes": "96x96"
+        },
+        {
+            "src": "icon-128x128.png",
+            "type": "image/png",
+            "sizes": "128x128"
+        },
+        {
+            "src": "icon-144x144.png",
+            "type": "image/png",
+            "sizes": "144x144"
+        },
+        {
+            "src": "icon-152x152.png",
+            "type": "image/png",
+            "sizes": "152x152"
+        },
+        {
+            "src": "icon-48x48.png",
+            "type": "image/png",
+            "sizes": "48x48"
+        },
+        {
+            "src": "maskable_icon_x192.png",
+            "type": "image/png",
+            "sizes": "192x192",
+            "purpose": "maskable"
+        },
+        {
+            "src": "icon-192x192.png",
+            "type": "image/png",
+            "sizes": "192x192"
+        },
+        {
+            "src": "maskable_icon_x512.png",
+            "type": "image/png",
+            "sizes": "512x512",
+            "purpose": "maskable"
+        },
+        {
+            "src": "icon-512x512.png",
+            "type": "image/png",
+            "sizes": "512x512"
+        }
+    ],
+    "start_url": "/",
+    "scope": "/",
+    "display": "standalone",
+    "orientation": "portrait",
+    "theme_color": "#000000",
+    "background_color": "#ffffff"
 }

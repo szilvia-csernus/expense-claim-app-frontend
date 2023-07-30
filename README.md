@@ -43,3 +43,7 @@ The favicon was generated using the following font:
 PWA favicon generator:
 
 https://tools.crawlink.com/tools/pwa-icon-generator/
+
+Guide on how to create a PWA app with vite + ReactJS
+
+https://vite-pwa-org.netlify.app/guide/
