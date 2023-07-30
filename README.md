@@ -77,3 +77,7 @@ The favicon was generated using the following font:
 - Font Author: Copyright 2010 The Josefin Sans Project Authors (https://github.com/ThomasJockin/JosefinSansFont-master), with Reserved Font Name "Josefin Sans".
 - Font Source: http://fonts.gstatic.com/s/josefinsans/v26/Qw3PZQNVED7rKGKxtqIqX5E-AVSJrOCfjY46_N_XXMFrLgTsQV0.ttf
 - Font License: SIL Open Font License, 1.1 (http://scripts.sil.org/OFL)
+
+PWA favicon generator:
+
+https://tools.crawlink.com/tools/pwa-icon-generator/

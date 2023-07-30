@@ -1,6 +1,8 @@
 {
 	"name": "expense-claim-app",
 	"version": "0.1.0",
+	"description": "Expense Reimbursement App for members of the Redeemer Church of Delft and Rotterdam, NL",
+	"author": "Szilvia Csernusne Berczes",
 	"private": true,
 	"dependencies": {
 		"@babel/plugin-proposal-private-property-in-object": "^7.21.11",
@@ -19,8 +21,7 @@
 		"start": "react-scripts start",
 		"build": "react-scripts build",
 		"test": "react-scripts test",
-		"eject": "react-scripts eject",
-		"deploy": "gh-pages -d build"
+		"eject": "react-scripts eject"
 	},
 	"eslintConfig": {
 		"extends": [
