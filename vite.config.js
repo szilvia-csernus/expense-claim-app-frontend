@@ -71,6 +71,9 @@ export default defineConfig(() => {
 				// svgr options 
 			}, }), 
 		],
+		workbox: {
+			globPatterns: ['**/*.{js,css,html,svg,png}'],
+		},
 		test: {
 			globals: true,
 			environment: 'jsdom',
