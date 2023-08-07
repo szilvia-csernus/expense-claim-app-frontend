@@ -1,6 +1,5 @@
 .logo {
     height: 80px;
-    object-fit: contain;
-    margin: 0 auto;
+    width: 300px;
     display: block;
 }

@@ -185,7 +185,7 @@ const CostForm = () => {
 
 	return (
 		<section className={classes.content}>
-			<h1 className={classes.header}>Redeemer Delft Expense Form</h1>
+			<h1 className={classes.header}>Expense Form</h1>
 			<div className={classes.body}>
 				<form className={classes.form} ref={formRef} onSubmit={submitHandler}>
 					{/* PERSONAL INFORMATION */}
