@@ -45,18 +45,18 @@ li {
 
 :root {
 
-    --main-title-color: rgb(34, 34, 34);
-    --main-text-color: rgb(85, 85, 85);
+    --main-title-color: #705f53;
+    --main-text-color: #534942;
     --line-color: rgb(204, 204, 204);
-    --label-text-color: #555555;
+    --label-text-color: #705f53;
     --main-bg-color: rgb(255, 255, 255);
     --input-border-color: #e1e1e1;
     --input-bg-color: #fcfcfc;
     --input-text-color: #919191;
-    --primary-color: #006a9f;
-    --button-color: rgb(54, 104, 151);
-    --button-border-color: rgb(20, 71, 117);
-    --button-hover-color: #3d71a1;
+    --primary-color: #008100;
+    --button-color: #008100;
+    --button-border-color: #008100;
+    --button-hover-color: #006800;
     --invert-text-color: white;
 
     --main-font-family: "Quicksand";
@@ -74,10 +74,10 @@ li {
 @media (prefers-color-scheme: dark) {
     :root {
         --main-title-color: rgb(255, 255, 255);
-        --main-bg-color: rgb(59, 59, 59);
+        --main-bg-color: rgb(35, 36, 38);
         --main-text-color: rgb(255, 255, 255);
         --label-text-color: white;
-        --input-bg-color: rgb(85, 85, 85);;
+        --input-bg-color: rgb(70, 70, 70);;
         --input-text-color: white;
     }
 }
@@ -95,10 +95,9 @@ body {
 
 header {
     height: 80px;
-    background-color: var(--primary-color);
     display: flex;
-    justify-content: space-between;
-    padding: 0 2rem 0 10px;
+    justify-content: flex-start;
+    padding: 1rem 2rem 0 30px;
 }
 
 
