@@ -316,6 +316,7 @@ const CostForm = () => {
 							onBlur={purposeBlurHandler}
 							value={purposeValue}
 						>
+							<option value="" disabled >Select a purpose</option>
 							<option value="Team building (4510)">Team building (4510)</option>
 							<option value="Team meals (4500)">Team meals (4500)</option>
 							<option value="Kids and Youth ministry (4460)">
@@ -396,6 +397,7 @@ const CostForm = () => {
 							id="receipts"
 							type="file"
 							accept="image/png, image/jpeg, image/jpg, application/pdf"
+							multiple
 							name="receipts"
 							className={receiptsClassNames}
 							onChange={receiptsChangeHandler}
