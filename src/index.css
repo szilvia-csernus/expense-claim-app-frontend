@@ -117,9 +117,7 @@ h2 {
     text-transform: uppercase;
     padding-bottom: .5rem;
     margin: 1rem 0 2rem;
-    
     border-bottom: 1px solid var(--line-color);
-    /* text-align: left; */
 }
 
 fieldset {
