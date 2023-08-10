@@ -74,7 +74,7 @@ li {
 @media (prefers-color-scheme: dark) {
     :root {
         --main-title-color: rgb(255, 255, 255);
-        --main-bg-color: rgb(35, 36, 38);
+        --main-bg-color: #232426;
         --main-text-color: rgb(255, 255, 255);
         --label-text-color: white;
         --input-bg-color: rgb(70, 70, 70);;
