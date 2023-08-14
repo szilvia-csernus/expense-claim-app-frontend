@@ -1,7 +1,7 @@
 import classes from './Buttons.module.css';
 
-export const Button = (props) => {
-	const classNames = `${classes.button} ${props.className}`;
+export const SubmitButton = (props) => {
+	const classNames = `${classes.button} ${classes.submitButton}`;
 	return (
 		<button className={classNames} onClick={props.onClick}>
 			{props.children}
@@ -9,8 +9,8 @@ export const Button = (props) => {
 	);
 };
 
-export const ButtonGeneral = (props) => {
-	const classNames = `${classes.button} ${classes.general} ${props.className}`;
+export const DeleteButton = (props) => {
+	const classNames = `${classes.button} ${classes.deleteButton}`;
 	return (
 		<button className={classNames} onClick={props.onClick}>
 			{props.children}

@@ -32,6 +32,7 @@
     border-color: var(--input-border-color);
     border-style: solid;
     border-width: 1px;
+    border-radius: 4px;
     color: var(--input-text-color);
     font-family: unset;
     font-size: 1rem;
@@ -53,27 +54,43 @@
 }
 
 .fileInputField {
-    height: 120px;
+    /* height: 120px; */
     border-style: dashed;
+    color: transparent;
+    border: none;
+    background-color: transparent;
+    padding: 0;
 }
 
-/* .fileInputField::-webkit-file-upload-button,
+.fileInputField::-webkit-file-upload-button,
 .input[type="file"]::file-selector-button {
-    display: inline-block;
+    background-color: transparent;
+    margin: .5rem 0 1rem;
     padding: .55rem 1.4rem;
     font-size: var(--body-font-size);
-    font-family: Helvetica, Arial, sans-serif;
-    font-weight: var(--body-font-weight);
+    font-weight: 700;
     color: var(--invert-text-color);
+    border: 1px solid var(--button-color);
+    border-radius: 1.4rem;
+}
+
+.fileInputField::-webkit-file-upload-button:hover,
+.input[type="file"]::file-selector-button:hover {
     background-color: var(--button-color);
-    border: none;
-    position: relative;
-    top: 50%;
-    left: calc(50% - 4rem);
-} */
+}
+
+.fileInputInvalid::-webkit-file-upload-button,
+.input[type="file"]::file-selector-button {
+    border-color: var(--danger-color);
+}
+
+.fileListItem {
+    color: var(--primary-color);
+    font-weight: 700;
+}
 
 .footer {
     display: flex;
     justify-content: flex-start;
-    padding-top: 2rem;
+    padding-top: 1rem;
 }
