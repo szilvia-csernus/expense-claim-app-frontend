@@ -1,8 +1,8 @@
 import classes from './Form.module.css';
 
 import { useState, useEffect, useRef } from "react";
-import useInput from '../Hooks/use-input';
-import { ButtonGeneral } from './Buttons';
+import useInput, { useFileInput } from '../Hooks/use-input';
+import { SubmitButton, DeleteButton } from './Buttons';
 import { useDispatch } from 'react-redux';
 import { send } from '../store/form-action-creator';
 
@@ -10,6 +10,21 @@ const isNotEmpty = (value) => value.trim() !== '';
 const isEmail = (value) =>
 	/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/.test(value);
 const noValidate = (value) => true;
+const fileUploadIsValid = (value) => {
+	const fileTypes = [
+		'image/png',
+		'image/jpeg',
+		'image/jpg',
+		'application/pdf',
+	];
+	const file = value[0];
+	const fileSize = file.size / 1024 / 1024;
+	const fileType = file.type;
+	if (fileTypes.includes(fileType) && fileSize < 30) {
+		return true;
+	}
+	return false;	
+}
 
 const CostForm = () => {
     const [formValid, setFormValid] = useState(false);
@@ -59,7 +74,7 @@ const CostForm = () => {
 		inputChangeHandler: purposeChangeHandler,
 		inputBlurHandler: purposeBlurHandler,
 		reset: purposeReset,
-	} = useInput(isNotEmpty);
+	} = useInput(noValidate);
 
 	const {
 		value: totalValue,
@@ -71,13 +86,15 @@ const CostForm = () => {
 	} = useInput(isNotEmpty);
 
 	const {
-		value: receiptsValue,
+		fileValue,
+		uploadedFiles,
 		isValid: receiptsIsValid,
 		hasError: receiptsHasError,
-		inputChangeHandler: receiptsChangeHandler,
-		inputBlurHandler: receiptsBlurHandler,
+		fileChangeHandler: receiptsChangeHandler,
+		fileBlurHandler: receiptsBlurHandler,
+        removeFile,
 		reset: receiptsReset,
-	} = useInput(isNotEmpty);
+	} = useFileInput(isNotEmpty);
 	
 	const {
 		value: ibanValue,
@@ -96,7 +113,6 @@ const CostForm = () => {
 		inputBlurHandler: accountNameBlurHandler,
 		reset: accountNameReset,
 	} = useInput(noValidate);
-
 
 	useEffect(() => {
 		if (nameIsValid && 
@@ -122,6 +138,7 @@ const CostForm = () => {
 			accountNameIsValid]);
 
 	const submitHandler = (event) => {
+		console.log(event)
 		event.preventDefault();
 
 		if (!formValid) {
@@ -137,6 +154,8 @@ const CostForm = () => {
 			return;
 		}
 
+		// event.target.submit();
+
 		nameReset();
 		emailReset();
 		dateReset();
@@ -147,21 +166,20 @@ const CostForm = () => {
 		ibanReset();
 		accountNameReset();
 
-		send(dispatch, formRef.current
-		// 	{
-		// 	name: nameValue,
-		// 	email: emailValue,
-		// 	date: dateValue,
-		// 	description: descriptionValue,
-		// 	purpose: purposeValue,
-		// 	total: totalValue,
-		// 	receipts: receiptsValue,
-		// 	iban: ibanValue,
-		// 	accountName: accountNameValue,
-		// }
-		);
+		// send(dispatch, formRef.current
+		// // 	{
+		// // 	name: nameValue,
+		// // 	email: emailValue,
+		// // 	date: dateValue,
+		// // 	description: descriptionValue,
+		// // 	purpose: purposeValue,
+		// // 	total: totalValue,
+		// // 	receipts: receiptsValue,
+		// // 	iban: ibanValue,
+		// // 	accountName: accountNameValue,
+		// // }
+		// );
 	};
-
 
 		const nameClassNames = `${classes.formInput} ${
 			nameHasError && classes.formInputInvalid}`;
@@ -171,12 +189,12 @@ const CostForm = () => {
 			dateHasError && classes.formInputInvalid}`;
 		const descriptionClassNames = `${classes.formInput} ${
 			descriptionHasError && classes.formInputInvalid}`;
-		const purposeClassNames = `${classes.formInput} ${
-			purposeHasError && classes.formInputInvalid}`;
+		const purposeClassNames = `${classes.formInput} 
+			${purposeHasError && classes.formInputInvalid}`;
 		const totalClassNames = `${classes.formInput} ${
 			totalHasError && classes.formInputInvalid}`;
 		const receiptsClassNames = `${classes.formInput} ${
-			receiptsHasError && classes.formInputInvalid} 
+			receiptsHasError && classes.fileInputInvalid} 
 			${classes.fileInputField}`;
 		const ibanClassNames = `${classes.formInput} ${
 			ibanHasError && classes.formInputInvalid}`;
@@ -187,7 +205,14 @@ const CostForm = () => {
 		<section className={classes.content}>
 			<h1 className={classes.header}>Expense Form</h1>
 			<div className={classes.body}>
-				<form className={classes.form} ref={formRef} onSubmit={submitHandler}>
+				<form
+					className={classes.form}
+					ref={formRef}
+					onSubmit={submitHandler}
+					encType="multipart/form-data"
+					action="https://expenseapp.fabian.plus/rotterdam/send-email.php"
+					method="post"
+				>
 					{/* PERSONAL INFORMATION */}
 					<fieldset>
 						<h2>Personal Information</h2>
@@ -316,7 +341,9 @@ const CostForm = () => {
 							onBlur={purposeBlurHandler}
 							value={purposeValue}
 						>
-							<option value="" disabled >Select a purpose</option>
+							{/* <option value="" disabled>
+								Select a purpose
+							</option>
 							<option value="Team building (4510)">Team building (4510)</option>
 							<option value="Team meals (4500)">Team meals (4500)</option>
 							<option value="Kids and Youth ministry (4460)">
@@ -346,8 +373,8 @@ const CostForm = () => {
 							</option>
 							<option value="Love Delft Fund (1913)">
 								Love Delft Fund (1913)
-							</option>
-							<option value="Rotterdam (4600)">Rotterdam (4600)</option>
+							</option> */}
+							<option defaultValue="Rotterdam (4600)">Rotterdam (4600)</option>
 							<option value="other">other</option>
 						</select>
 
@@ -393,18 +420,25 @@ const CostForm = () => {
 							Please upload a clear picture or PDF of the receipt of the expense
 							made. You can upload multiple files.
 						</p>
+						<ul>
+							{uploadedFiles.map((file) => (
+								<li className={classes.fileListItem} key={file}>
+									<DeleteButton onClick={() => removeFile(file)}>
+										X
+									</DeleteButton>
+									{file}
+								</li>
+							))}
+						</ul>
 						<input
 							id="receipts"
 							type="file"
 							accept="image/png, image/jpeg, image/jpg, application/pdf"
-							multiple
-							name="receipts"
 							className={receiptsClassNames}
 							onChange={receiptsChangeHandler}
-							onBlur={receiptsBlurHandler}
-							value={receiptsValue}
+							value={fileValue}
 						/>
-						
+
 						<div
 							className={
 								receiptsHasError
@@ -417,6 +451,7 @@ const CostForm = () => {
 						<p className={classes.labelSubText}>
 							Accepted file types: png, jpg, jpeg, pdf. Max file size: 30MB.
 						</p>
+						<input type="hidden" name="files" multiple value={uploadedFiles} />
 					</fieldset>
 
 					{/* REIMBURSEMENT DETAILS  */}
@@ -449,7 +484,7 @@ const CostForm = () => {
 
 						{/* Name of Bank Account Holder  */}
 						<label htmlFor="accountName" className={classes.labelText}>
-							Name of Bank Account Holder *
+							Name of Bank Account Holder
 						</label>
 						<p className={classes.labelSubText}>
 							Please enter the name of the account holder if it is different
@@ -476,7 +511,7 @@ const CostForm = () => {
 					</fieldset>
 
 					<div className={classes.footer}>
-						<ButtonGeneral type="submit">Submit</ButtonGeneral>
+						<SubmitButton type="submit">Submit</SubmitButton>
 					</div>
 				</form>
 			</div>
