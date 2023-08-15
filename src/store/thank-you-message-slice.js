@@ -7,7 +7,7 @@ const thankYouMessageSlice = createSlice({
 		open() {
 			return true;
 		},
-		reset() {
+		close() {
 			return false;
 		},
 	},

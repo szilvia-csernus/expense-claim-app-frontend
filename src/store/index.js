@@ -8,7 +8,7 @@ const store = configureStore({
 		costForm: costFormSlice.reducer,
 		thankYouMessage: thankYouMessageSlice.reducer,
 		errorMessage: errorMessageSlice.reducer,
-	},
+	}
 });
 
 export default store;
