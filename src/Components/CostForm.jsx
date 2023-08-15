@@ -1,35 +1,43 @@
 import classes from './Form.module.css';
 
 import { useState, useEffect, useRef } from "react";
-import useInput, { useFileInput } from '../Hooks/use-input';
-import { SubmitButton, DeleteButton } from './Buttons';
-import { useDispatch } from 'react-redux';
+import useInput from '../Hooks/use-input';
+import { SubmitButton } from './Buttons';
+import FileUploader from './FileUploader';
 import { send } from '../store/form-action-creator';
+import { useSelector, useDispatch } from 'react-redux';
+import { costFormActions } from '../store/cost-form-slice';
 
 const isNotEmpty = (value) => value.trim() !== '';
 const isEmail = (value) =>
 	/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/.test(value);
-const noValidate = (value) => true;
-const fileUploadIsValid = (value) => {
-	const fileTypes = [
-		'image/png',
-		'image/jpeg',
-		'image/jpg',
-		'application/pdf',
-	];
-	const file = value[0];
-	const fileSize = file.size / 1024 / 1024;
-	const fileType = file.type;
-	if (fileTypes.includes(fileType) && fileSize < 30) {
-		return true;
-	}
-	return false;	
-}
+const noValidate = () => true;
+
 
 const CostForm = () => {
     const [formValid, setFormValid] = useState(false);
-    const dispatch = useDispatch();
+	const [selectedFile, setSelectedFile] = useState(null);
+	const [fileError, setFileError] = useState(false);
+	const dispatch = useDispatch();
 	const formRef = useRef(null);
+
+	// const addToFormData = (name, value) => {
+	// 	const newFormData = new FormData();
+	// 	for (const { key, val } of formData.entries()) {
+	// 		newFormData.set(key, val);
+	// 	}
+	// 	newFormData.set(name, value);
+	// 	setFormData(newFormData);
+	// };
+
+	// const removeFromFormData = (name) => {
+	// 	const newFormData = new FormData();
+	// 	for (const { key, val } of formData.entries()) {
+	// 		newFormData.set(key, val);
+	// 	}
+	// 	newFormData.delete(name);
+	// 	setFormData(newFormData);
+	// };
 
     const {
 		value: nameValue,
@@ -74,7 +82,7 @@ const CostForm = () => {
 		inputChangeHandler: purposeChangeHandler,
 		inputBlurHandler: purposeBlurHandler,
 		reset: purposeReset,
-	} = useInput(noValidate);
+	} = useInput(noValidate, 'Rotterdam (4600)');
 
 	const {
 		value: totalValue,
@@ -84,17 +92,6 @@ const CostForm = () => {
 		inputBlurHandler: totalBlurHandler,
 		reset: totalReset,
 	} = useInput(isNotEmpty);
-
-	const {
-		fileValue,
-		uploadedFiles,
-		isValid: receiptsIsValid,
-		hasError: receiptsHasError,
-		fileChangeHandler: receiptsChangeHandler,
-		fileBlurHandler: receiptsBlurHandler,
-        removeFile,
-		reset: receiptsReset,
-	} = useFileInput(isNotEmpty);
 	
 	const {
 		value: ibanValue,
@@ -121,7 +118,7 @@ const CostForm = () => {
 			descriptionIsValid &&
 			purposeIsValid &&
 			totalIsValid &&
-			receiptsIsValid &&
+			selectedFile && !fileError &&
 			ibanIsValid &&
 			accountNameIsValid) {
 			setFormValid(true);
@@ -133,13 +130,14 @@ const CostForm = () => {
 			descriptionIsValid, 
 			purposeIsValid,
 			totalIsValid,
-			receiptsIsValid,
+			selectedFile, fileError,
 			ibanIsValid,
 			accountNameIsValid]);
 
 	const submitHandler = (event) => {
-		console.log(event)
 		event.preventDefault();
+		dispatch(costFormActions.setSubmitting());
+		console.log(event)
 
 		if (!formValid) {
 			nameBlurHandler();
@@ -148,37 +146,40 @@ const CostForm = () => {
 			descriptionBlurHandler();
 			purposeBlurHandler();
 			totalBlurHandler();
-			receiptsBlurHandler();
 			ibanBlurHandler();
 			accountNameBlurHandler();
 			return;
+		} else {
+
+			
+			const formData = new FormData();
+			
+			formData.set('name', nameValue);
+			formData.set('email', emailValue);
+			formData.set('date', dateValue);
+			formData.set('description', descriptionValue);
+			formData.set('purpose', purposeValue);
+			formData.set('total', totalValue);
+			formData.set('receipts', selectedFile);
+			formData.set('iban', ibanValue);
+			formData.set('accountName', accountNameValue);
+			console.log(Object.fromEntries(formData));
+			
+			// event.target.submit();
+			send(dispatch, formData);
+			
+			dispatch(costFormActions.resetSubmitting());
+			nameReset();
+			emailReset();
+			dateReset();
+			descriptionReset();
+			purposeReset();
+			totalReset();
+			setSelectedFile(null);
+			ibanReset();
+			accountNameReset();
+			
 		}
-
-		// event.target.submit();
-
-		nameReset();
-		emailReset();
-		dateReset();
-		descriptionReset();
-		purposeReset();
-		totalReset();
-		receiptsReset();
-		ibanReset();
-		accountNameReset();
-
-		// send(dispatch, formRef.current
-		// // 	{
-		// // 	name: nameValue,
-		// // 	email: emailValue,
-		// // 	date: dateValue,
-		// // 	description: descriptionValue,
-		// // 	purpose: purposeValue,
-		// // 	total: totalValue,
-		// // 	receipts: receiptsValue,
-		// // 	iban: ibanValue,
-		// // 	accountName: accountNameValue,
-		// // }
-		// );
 	};
 
 		const nameClassNames = `${classes.formInput} ${
@@ -193,9 +194,6 @@ const CostForm = () => {
 			${purposeHasError && classes.formInputInvalid}`;
 		const totalClassNames = `${classes.formInput} ${
 			totalHasError && classes.formInputInvalid}`;
-		const receiptsClassNames = `${classes.formInput} ${
-			receiptsHasError && classes.fileInputInvalid} 
-			${classes.fileInputField}`;
 		const ibanClassNames = `${classes.formInput} ${
 			ibanHasError && classes.formInputInvalid}`;
 		const accountNameClassNames = `${classes.formInput} ${
@@ -418,40 +416,18 @@ const CostForm = () => {
 						</label>
 						<p className={classes.labelSubText}>
 							Please upload a clear picture or PDF of the receipt of the expense
-							made. You can upload multiple files.
+							made. You can upload multiple files. Accepted file types: png,
+							jpg, jpeg, pdf. Max file size: 30MB.
 						</p>
-						<ul>
-							{uploadedFiles.map((file) => (
-								<li className={classes.fileListItem} key={file}>
-									<DeleteButton onClick={() => removeFile(file)}>
-										X
-									</DeleteButton>
-									{file}
-								</li>
-							))}
-						</ul>
-						<input
-							id="receipts"
-							type="file"
-							accept="image/png, image/jpeg, image/jpg, application/pdf"
-							className={receiptsClassNames}
-							onChange={receiptsChangeHandler}
-							value={fileValue}
-						/>
 
-						<div
-							className={
-								receiptsHasError
-									? classes.feedbackInvalid
-									: classes.feedbackValid
-							}
-						>
-							Please upload your receipts.
-						</div>
-						<p className={classes.labelSubText}>
-							Accepted file types: png, jpg, jpeg, pdf. Max file size: 30MB.
-						</p>
-						<input type="hidden" name="files" multiple value={uploadedFiles} />
+						<FileUploader 
+							selectedFile={selectedFile} 
+							setSelectedFile={setSelectedFile}
+							fileError={fileError}
+							setFileError={setFileError}
+							/>
+
+						
 					</fieldset>
 
 					{/* REIMBURSEMENT DETAILS  */}

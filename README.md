@@ -5,7 +5,7 @@ In the project directory, you can run:
 
 ### `npm start`
 
-Runs the app in the development mode.\
+Runs the app in development mode.\
 Open [http://localhost:5173](http://localhost:5173) to view it in your browser.
 
 The page will reload when you make changes.\
@@ -32,13 +32,6 @@ This app is deployed on firebase.
 
 
 ## Credits
-
-The favicon was generated using the following font:
-
-- Font Title: Josefin Sans
-- Font Author: Copyright 2010 The Josefin Sans Project Authors (https://github.com/ThomasJockin/JosefinSansFont-master), with Reserved Font Name "Josefin Sans".
-- Font Source: http://fonts.gstatic.com/s/josefinsans/v26/Qw3PZQNVED7rKGKxtqIqX5E-AVSJrOCfjY46_N_XXMFrLgTsQV0.ttf
-- Font License: SIL Open Font License, 1.1 (http://scripts.sil.org/OFL)
 
 PWA favicon generator:
 

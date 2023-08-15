@@ -50,14 +50,14 @@ html {
 :root {
 
     --logo-color: #a3826c;
-    --main-title-color: #705f53;
-    --main-text-color: #534942;
+    --main-title-color: #534942;
+    --main-text-color: #3c3733;
     --line-color: rgb(204, 204, 204);
-    --label-text-color: #705f53;
+    --label-text-color: #3c3733;
     --main-bg-color: rgb(255, 255, 255);
     --input-border-color: #e1e1e1;
-    --input-bg-color: #fcfcfc;
-    --input-text-color: #919191;
+    --input-bg-color: #f3f3f3;
+    --input-text-color: #7c7c7c;
     --primary-color: #009300;
     --button-color: #008100;
     --button-border-color: #008100;
@@ -122,7 +122,7 @@ h2 {
     color: var(--main-title-color);
     text-transform: uppercase;
     padding-bottom: .5rem;
-    margin: 2rem 0 2rem;
+    margin: 2.5rem 0 2rem;
     border-bottom: 1px solid var(--line-color);
 }
 
@@ -136,5 +136,9 @@ input[type="text"] {
     --webkit-appearance: none;
     outline: none;
     font-family: Helvetica, Arial, sans-serif;
+}
+
+input:-internal-autofill-selected {
+    color: var(--input-text-color) !important;
 }
 

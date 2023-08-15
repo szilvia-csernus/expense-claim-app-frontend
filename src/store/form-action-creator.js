@@ -1,11 +1,17 @@
-export const send = async (dispatch, form) => {
-	const result = await fetch('/api/send-email', {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'multipart/form-data',
-		},
-		body: form,
-	}).then(
+import { errorMessageActions } from '../store/error-message-slice';
+import { thankYouMessageActions } from '../store/thank-you-message-slice';
+
+export const send = async (dispatch, formData) => {
+	const result = await fetch(
+		'"https://expenseapp.fabian.plus/rotterdam/send-email.php"',
+		{
+			method: 'POST',
+			// headers: {
+			// 	'Content-Type': 'multipart/form-data',
+			// },
+			body: formData,
+		}
+	).then(
 		(response) => {
 			console.log(response);
 			if (response.status === 200) {

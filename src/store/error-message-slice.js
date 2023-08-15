@@ -7,7 +7,7 @@ const errorMessageSlice = createSlice({
 		open() {
 			return true;
 		},
-		reset() {
+		close() {
 			return false;
 		},
 	},

@@ -3,7 +3,7 @@ import classes from './Buttons.module.css';
 export const SubmitButton = (props) => {
 	const classNames = `${classes.button} ${classes.submitButton}`;
 	return (
-		<button className={classNames} onClick={props.onClick}>
+		<button type="submit" className={classNames} onClick={props.onClick}>
 			{props.children}
 		</button>
 	);
@@ -12,8 +12,17 @@ export const SubmitButton = (props) => {
 export const DeleteButton = (props) => {
 	const classNames = `${classes.button} ${classes.deleteButton}`;
 	return (
-		<button className={classNames} onClick={props.onClick}>
+		<button type="button" className={classNames} onClick={props.onClick}>
 			{props.children}
 		</button>
 	);
 };
+
+export const NewFormButton = (props) => {
+	const classNames = `${classes.button} ${classes.submitButton}`;
+	return (
+		<button type="button" className={classNames} onClick={props.clickHandler}>
+			{props.children}
+		</button>
+	);
+}
