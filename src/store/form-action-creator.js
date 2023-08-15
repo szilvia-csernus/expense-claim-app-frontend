@@ -5,7 +5,7 @@ import { costFormActions } from './cost-form-slice';
 export const send = async (dispatch, formData) => {
 	dispatch(costFormActions.setSending());
 	const result = await fetch(
-		'"https://expenseapp.fabian.plus/rotterdam/send-email.php"',
+		'https://expenseapp.fabian.plus/rotterdam/send-email.php',
 		{
 			method: 'POST',
 			// headers: {
