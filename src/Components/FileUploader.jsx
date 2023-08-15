@@ -3,39 +3,53 @@ import { DeleteButton } from './Buttons';
 import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
 
-const FileUploader = ({selectedFile, setSelectedFile, fileError, setFileError}) => {
+const FileUploader = ({selectedFile, setSelectedFile, fileError, setFileError, 
+    fileList, setFileList, totalFileSize, setTotalFileSize}) => {
     const submitting = useSelector(state => state.costForm.submitting);
+    
     const receiptsClassNames = `${classes.formInput} 
                                 ${fileError && classes.fileInputInvalid} 
                                 ${classes.fileInputField}`;
 
+    const addFileToList = (file) => {
+        setFileList(prevList => [...prevList, file]);
+        setTotalFileSize(prevSize => prevSize + file.size);
+    }
+
+    const removeFileFromList = (file) => {
+        setFileList(prevList => prevList.filter(f => f !== file));
+        setTotalFileSize(prevSize => prevSize - file.size);
+    }
+
     useEffect(() => {
         if (submitting) {
-            if (!selectedFile) {
+            if (fileList.length === 0) {
             setFileError('Please upload a file')
             }
         }
-    }, [submitting, selectedFile, setFileError])
+    }, [submitting, fileList, setFileError, totalFileSize])
     
 
     const fileUploadIsValid = (file) => {
+        console.log(totalFileSize)
 			const fileTypes = [
 				'image/png',
 				'image/jpeg',
 				'image/jpg',
 				'application/pdf',
 			];
-			const fileSize = file.size / 1024 / 1024;
+			const fileSize = file.size;
 			const fileType = file.type;
             if (!fileTypes.includes(fileType)) {
                 setFileError('File type not supported');
                 return false
             }
-			else if (fileSize > 1) {
-                setFileError('File size too large')
+			else if (totalFileSize + fileSize > 30*1024*1024) {
+                setFileError('Total file size cannot exceed 30 MB');
+                setTimeout(() => setFileError(false), 3000);
                 return false
 			}
-			setFileError(null);
+			setFileError(false);
             return true
 		};
 
@@ -43,34 +57,39 @@ const FileUploader = ({selectedFile, setSelectedFile, fileError, setFileError}) 
         const file = e.target.files[0];
         if (fileUploadIsValid(file)) {
             setSelectedFile(file);
+            addFileToList(file);
         }
     }
 
-    const removeFile = () => {
-        setSelectedFile(null);
+    const handleOnClick = (e) => {
+        setFileError(false);
     }
 
-    const showInputField = 
-            (<input
+    const showFileList = (
+			<ul>
+            { fileList.map((file, idx) => {
+                return (
+                 <li className={classes.fileListItem} key={idx}>
+                    <DeleteButton onClick={() => removeFileFromList(file)}>
+						X
+					</DeleteButton>
+					{file.name} - {(file.size / 1024).toFixed(2)} kB
+                </li>)
+            })}
+			</ul>
+		);
+
+    return (
+			<>
+				{showFileList}
+				<input
                 type="file"
                 name="receipts"
                 accept="image/png, image/jpeg, image/jpg, application/pdf"
                 className={receiptsClassNames}
                 onChange={handleFileInput}
-            />);
-
-    const showFile =
-            (<div className={classes.fileListItem}>
-                <DeleteButton onClick={() => removeFile(selectedFile)}>
-                    X
-                </DeleteButton>
-                {selectedFile?.name} - {(selectedFile?.size / 1024).toFixed(2)} kB
-            </div>);
-
-    return (
-			<>
-				{selectedFile && showFile}
-				{!selectedFile && showInputField}
+                onClick={handleOnClick}
+            />
 				<div
 					className={
 						fileError ? classes.feedbackInvalid : classes.feedbackValid

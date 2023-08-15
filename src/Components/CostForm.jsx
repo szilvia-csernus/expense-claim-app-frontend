@@ -18,26 +18,10 @@ const CostForm = () => {
     const [formValid, setFormValid] = useState(false);
 	const [selectedFile, setSelectedFile] = useState(null);
 	const [fileError, setFileError] = useState(false);
+	const [fileList, setFileList] = useState([]);
+	const [totalFileSize, setTotalFileSize] = useState(0);
 	const dispatch = useDispatch();
 	// const formRef = useRef(null);
-
-	// const addToFormData = (name, value) => {
-	// 	const newFormData = new FormData();
-	// 	for (const { key, val } of formData.entries()) {
-	// 		newFormData.set(key, val);
-	// 	}
-	// 	newFormData.set(name, value);
-	// 	setFormData(newFormData);
-	// };
-
-	// const removeFromFormData = (name) => {
-	// 	const newFormData = new FormData();
-	// 	for (const { key, val } of formData.entries()) {
-	// 		newFormData.set(key, val);
-	// 	}
-	// 	newFormData.delete(name);
-	// 	setFormData(newFormData);
-	// };
 
     const {
 		value: nameValue,
@@ -118,7 +102,7 @@ const CostForm = () => {
 			descriptionIsValid &&
 			purposeIsValid &&
 			totalIsValid &&
-			selectedFile && !fileError &&
+			fileList.length > 0 && !fileError &&
 			ibanIsValid &&
 			accountNameIsValid) {
 			setFormValid(true);
@@ -130,7 +114,7 @@ const CostForm = () => {
 			descriptionIsValid, 
 			purposeIsValid,
 			totalIsValid,
-			selectedFile, fileError,
+			fileList, fileError,
 			ibanIsValid,
 			accountNameIsValid]);
 
@@ -160,13 +144,15 @@ const CostForm = () => {
 			formData.set('description', descriptionValue);
 			formData.set('purpose', purposeValue);
 			formData.set('total', totalValue);
-			formData.set('receipts', selectedFile);
+			for (let i = 0; i < fileList.length; i++) {
+				formData.set(`receipt${i}`, fileList[i]);
+			}
 			formData.set('iban', ibanValue);
 			formData.set('accountName', accountNameValue);
 			console.log(Object.fromEntries(formData));
 			
 			// event.target.submit();
-			send(dispatch, formData);
+			// send(dispatch, formData);
 			
 			dispatch(costFormActions.resetSubmitting());
 			nameReset();
@@ -176,7 +162,9 @@ const CostForm = () => {
 			purposeReset();
 			totalReset();
 			setSelectedFile(null);
+			setFileList([]);
 			setFileError(false);
+			setTotalFileSize(0);
 			ibanReset();
 			accountNameReset();
 			
@@ -426,6 +414,10 @@ const CostForm = () => {
 							setSelectedFile={setSelectedFile}
 							fileError={fileError}
 							setFileError={setFileError}
+							fileList={fileList}
+							setFileList={setFileList}
+							totalFileSize={totalFileSize}
+							setTotalFileSize={setTotalFileSize}
 							/>
 
 						
