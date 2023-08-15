@@ -1,6 +1,7 @@
 import classes from './Form.module.css';
 import { DeleteButton } from './Buttons';
 import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
 
 const FileUploader = ({selectedFile, setSelectedFile, fileError, setFileError}) => {
     const submitting = useSelector(state => state.costForm.submitting);
@@ -8,11 +9,15 @@ const FileUploader = ({selectedFile, setSelectedFile, fileError, setFileError}) 
                                 ${fileError && classes.fileInputInvalid} 
                                 ${classes.fileInputField}`;
 
-    if (submitting) {
-        if (!selectedFile) {
-           setFileError('Please upload a file')
+    useEffect(() => {
+        if (submitting) {
+            if (!selectedFile) {
+            setFileError('Please upload a file')
+            }
         }
-    }
+    }, [submitting, selectedFile, setFileError])
+    
+
     const fileUploadIsValid = (file) => {
 			const fileTypes = [
 				'image/png',

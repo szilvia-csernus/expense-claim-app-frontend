@@ -19,7 +19,7 @@ const CostForm = () => {
 	const [selectedFile, setSelectedFile] = useState(null);
 	const [fileError, setFileError] = useState(false);
 	const dispatch = useDispatch();
-	const formRef = useRef(null);
+	// const formRef = useRef(null);
 
 	// const addToFormData = (name, value) => {
 	// 	const newFormData = new FormData();
@@ -176,6 +176,7 @@ const CostForm = () => {
 			purposeReset();
 			totalReset();
 			setSelectedFile(null);
+			setFileError(false);
 			ibanReset();
 			accountNameReset();
 			
@@ -205,11 +206,11 @@ const CostForm = () => {
 			<div className={classes.body}>
 				<form
 					className={classes.form}
-					ref={formRef}
 					onSubmit={submitHandler}
-					encType="multipart/form-data"
-					action="https://expenseapp.fabian.plus/rotterdam/send-email.php"
-					method="post"
+					// ref={formRef}
+					// encType="multipart/form-data"
+					// action="https://expenseapp.fabian.plus/rotterdam/send-email.php"
+					// method="post"
 				>
 					{/* PERSONAL INFORMATION */}
 					<fieldset>
