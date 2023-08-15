@@ -5,6 +5,7 @@ const costFormSlice = createSlice({
 	initialState: {
 		status: false,
 		submitting: false,
+		sending: false,
 	},
 	reducers: {
 		open(state) {
@@ -19,6 +20,12 @@ const costFormSlice = createSlice({
 		},
 		resetSubmitting(state) {
 			state.submitting = false;
+		},
+		setSending(state) {
+			state.sending = true;
+		},
+		resetSending(state) {
+			state.sending = false;
 		}
 	},
 });
