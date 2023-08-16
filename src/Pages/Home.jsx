@@ -18,7 +18,7 @@ function Home() {
             {sending && <Loader />}
             {thankYouMessage && <ThankYouMessage/>}
             {errorMessage && <ErrorMessage/>}
-            {!thankYouMessage && !errorMessage && !sending && <CostForm />}
+            {<CostForm />}
             <Footer />
         </Container>
     )

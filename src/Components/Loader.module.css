@@ -2,7 +2,6 @@
     display: block;
     margin: auto;
     text-align: center;
-    padding-top: 10rem;
 }
 
 /* Loader styling from https://loading.io/css/ */
@@ -24,7 +23,7 @@
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: var(--logo-color);
+  background: var(--primary-color);
   margin: -4px 0 0 -4px;
 }
 .loader div:nth-child(1) {

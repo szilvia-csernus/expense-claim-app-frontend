@@ -150,23 +150,28 @@ const CostForm = () => {
 			formData.set('iban', ibanValue);
 			formData.set('accountName', accountNameValue);
 			console.log(Object.fromEntries(formData));
+
+			function resetForm() {
+				console.log('resetting form');
+				nameReset();
+				emailReset();
+				dateReset();
+				descriptionReset();
+				purposeReset();
+				totalReset();
+				setSelectedFile(null);
+				setFileList([]);
+				setFileError(false);
+				setTotalFileSize(0);
+				ibanReset();
+				accountNameReset();
+			}
 			
 			// event.target.submit();
-			// send(dispatch, formData);
+			send(dispatch, formData, resetForm);
 			
 			dispatch(costFormActions.resetSubmitting());
-			nameReset();
-			emailReset();
-			dateReset();
-			descriptionReset();
-			purposeReset();
-			totalReset();
-			setSelectedFile(null);
-			setFileList([]);
-			setFileError(false);
-			setTotalFileSize(0);
-			ibanReset();
-			accountNameReset();
+			
 			
 		}
 	};
@@ -256,11 +261,11 @@ const CostForm = () => {
 					{/* EXPENSES */}
 					<fieldset>
 						<h2>Expenses</h2>
-						<p className={classes.labelSubText}>
+						{/* <p className={classes.labelSubText}>
 							You can submit any number of receipts and sum them up in one
 							Expense Form, but please collect different purposes into separate
 							submissions, to help making our bookkeeping transparent.
-						</p>
+						</p> */}
 
 						{/* Date  */}
 						<label htmlFor="date" className={classes.labelText}>
@@ -405,8 +410,7 @@ const CostForm = () => {
 						</label>
 						<p className={classes.labelSubText}>
 							Please upload a clear picture or PDF of the receipt of the expense
-							made. You can upload multiple files. Accepted file types: png,
-							jpg, jpeg, pdf. Max file size: 30MB.
+							made. Accepted file types: png, jpg, jpeg, pdf. Max file size: 5MB.
 						</p>
 
 						<FileUploader 

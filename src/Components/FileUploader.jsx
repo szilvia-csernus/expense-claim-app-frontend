@@ -42,9 +42,10 @@ const FileUploader = ({selectedFile, setSelectedFile, fileError, setFileError,
 			const fileType = file.type;
             if (!fileTypes.includes(fileType)) {
                 setFileError('File type not supported');
+                setTimeout(() => setFileError(false), 3000);
                 return false
             }
-			else if (totalFileSize + fileSize > 30*1024*1024) {
+			else if (totalFileSize + fileSize > 5.5*1024*1024) {
                 setFileError('Total file size cannot exceed 30 MB');
                 setTimeout(() => setFileError(false), 3000);
                 return false
@@ -73,7 +74,7 @@ const FileUploader = ({selectedFile, setSelectedFile, fileError, setFileError,
                     <DeleteButton onClick={() => removeFileFromList(file)}>
 						X
 					</DeleteButton>
-					{file.name} - {(file.size / 1024).toFixed(2)} kB
+					{file.name} - {(file.size / 1024).toFixed(0)} kB
                 </li>)
             })}
 			</ul>

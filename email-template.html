@@ -1,0 +1,238 @@
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Expense Reimbursement App for Redeemer Church Members">
+    <meta name="theme-color" content="#ffffff">
+    <title>Expense Reimbursement</title>
+    <style type="text/css">
+        @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@500&family=Quicksand:wght@400;700&display=swap');
+
+        /* Google Fonts  */
+        /* --------------- RESET ------------- */
+        html,
+        body,
+        header,
+        footer,
+        section,
+        article,
+        h1,
+        h2,
+        h3,
+        p,
+        a,
+        button,
+        ul,
+        address,
+        svg,
+        input,
+        textarea {
+            margin: 0;
+            border: 0;
+            padding: 0;
+            font: inherit;
+            color: inherit;
+            background: transparent;
+            text-decoration: none;
+            box-sizing: border-box;
+        }
+
+        img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        /* --------------- DEFAULTS ------------- */
+        html {
+            font: -apple-system-body;
+        }
+
+        :root {
+
+            --logo-color: #a3826c;
+            --main-title-color: #534942;
+            --main-text-color: #3c3733;
+            --line-color: rgb(204, 204, 204);
+            --label-text-color: #3c3733;
+            --main-bg-color: rgb(255, 255, 255);
+            --input-border-color: #e1e1e1;
+            --input-bg-color: #f3f3f3;
+            --input-text-color: #7c7c7c;
+            --primary-color: #009300;
+            --button-color: #008100;
+            --button-border-color: #008100;
+            --button-hover-color: #006800;
+            --invert-text-color: white;
+            --danger-color: rgb(200, 0, 0);
+
+            --main-font-family: "Quicksand";
+            --main-title-font-family: "Josefin Sans";
+            --body-font-weight: 400;
+            --strong-font-weight: 700;
+            --button-font-weight: 600;
+
+            --body-font-size: 1rem;
+            --main-title-font-size: 1.3rem;
+            --subtitle-font-size: 1.1rem;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --main-title-color: rgb(255, 255, 255);
+                --main-bg-color: #232426;
+                --main-text-color: rgb(255, 255, 255);
+                --label-text-color: white;
+                --input-bg-color: rgb(70, 70, 70);
+                ;
+                --input-text-color: white;
+            }
+        }
+
+        body {
+            color: var(--main-text-color);
+            font-family: var(--main-font-family);
+            font-size: var(--body-font-size);
+            font-weight: var(--body-font-weight);
+            background-color: var(--main-bg-color);
+
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        header {
+            height: 80px;
+            display: flex;
+            justify-content: flex-start;
+            padding: 1rem 2rem 0 30px;
+        }
+
+        h1 {
+            font-family: var(--main-title-font-family);
+            font-size: var(--main-title-font-size);
+            color: var(--main-title-color);
+            text-transform: uppercase;
+            padding: 1.5rem 0;
+        }
+
+        h2 {
+            font-family: var(--main-title-font-family);
+            font-size: var(--subtitle-font-size);
+            font-weight: var(--main-title-font-weight);
+            color: var(--main-title-color);
+            text-transform: uppercase;
+            padding-bottom: .5rem;
+            margin: 2.5rem 0 2rem;
+            border-bottom: 1px solid var(--line-color);
+        }
+
+        section {
+            border-width: 1px;
+            border: none;
+            padding: 0;
+        }
+
+        .logo {
+            height: 60px;
+            width: 210px;
+            display: block;
+        }
+    
+        .content {
+            display: block;
+            margin: auto;
+            padding: 2rem;
+        }
+
+        .labelText {
+            display: block;
+            font-size: 1rem;
+            font-weight: bold;
+            color: var(--label-text-color);
+            margin: 2rem 0 1rem;
+        }
+
+        .formInput {
+            display: block;
+            margin: 0 0 .2rem;
+            padding: .5rem .3rem;
+            width: 100%;
+            background-color: var(--input-bg-color);
+            border-color: var(--input-border-color);
+            border-style: solid;
+            border-width: 1px;
+            border-radius: 4px;
+            color: var(--input-text-color);
+            font-family: unset;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div id="root">
+        <div class="container">
+            <header><img src="./logo.png" width="270" height="80" class="logo" alt="logo"></header>
+            <div class="content">
+                <h1>Expense Form</h1>
+                <div>
+                    <section>
+                        <h2>Personal Information</h2>
+                        
+                        <div class="labelText">Name</div>
+                        <div id="name" class="formInput" value=""></div>
+
+                        
+                        <div class="labelText">Email address</div>
+                        <div id="email" class="formInput"></div>
+                        
+                    </section>
+                    <section>
+                        <h2>Expenses</h2>
+
+                        <div for="date" class="labelText">Date of expense (on receipt)</div>
+                        <div id="date" class="formInput"></div>
+
+                        <div class="labelText">Description</div>
+                        <div id="description" class="formInput"></div>
+                        
+                        <div class="labelText">Purpose</div>
+                        <div id="purpose" class="formInput"></div>
+                            
+                        <div class="labelText">Total</div>
+                        <div id="total" class="formInput"></div>
+                        
+                        <div class="labelText">Receipt(s)</div>
+                        <ul>
+                            <li id=""></li>
+                        </ul>
+
+                    </section>
+
+                    <section>
+
+                        <h2>Reimbursement Details</h2>
+                        
+                        <div class="labelText">Bank Account</div>
+                        <div id="iban" class="formInput"></div>
+                        
+                        <div class="labelText">Name of Bank Account Holder (if different)</div>
+                        <div id="accountName" class="formInput">
+                    
+                    </section>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

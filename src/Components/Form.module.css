@@ -1,7 +1,6 @@
 .content {
     display: block;
     margin: auto;
-    /* overflow-y: scroll; */
     padding: 2rem;
 }
 
@@ -34,7 +33,6 @@
     border-width: 1px;
     border-radius: 4px;
     color: var(--input-text-color);
-    font-family: unset;
     font-size: 1rem;
     font-weight: 600;
 }
@@ -67,8 +65,9 @@
     background-color: transparent;
     margin: .5rem 0 1rem;
     padding: .55rem 1.4rem;
+    font-family: var(--main-font-family);
     font-size: var(--body-font-size);
-    font-weight: 500;
+    font-weight: 700;
     color: var(--input-text-color);
     border: 1px solid var(--button-color);
     border-radius: 1.4rem;
@@ -94,4 +93,12 @@
     display: flex;
     justify-content: flex-start;
     padding-top: 1rem;
+}
+
+.messageContent {
+    display: block;
+    margin: auto;
+    padding: .2rem 2rem 2rem 2rem;
+    background-color: var(--main-bg-color);
+    border-radius: .5rem;
 }
