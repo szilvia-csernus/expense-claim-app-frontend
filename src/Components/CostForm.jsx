@@ -15,22 +15,26 @@ const noValidate = () => true;
 
 
 const CostForm = () => {
-    const [formValid, setFormValid] = useState(false);
+	const [formValid, setFormValid] = useState(false);
+	// file uploads are not allowed to be stored in redux store
+	// https://redux-toolkit.js.org/usage/usage-guide#working-with-non-serializable-data
+	// however, the solution above did not work for me, so I am using useState instead
 	const [selectedFile, setSelectedFile] = useState(null);
 	const [fileError, setFileError] = useState(false);
 	const [fileList, setFileList] = useState([]);
 	const [totalFileSize, setTotalFileSize] = useState(0);
+	
 	const dispatch = useDispatch();
 	// const formRef = useRef(null);
 
-    const {
+	const {
 		value: nameValue,
 		isValid: nameIsValid,
 		hasError: nameHasError,
 		inputChangeHandler: nameChangeHandler,
 		inputBlurHandler: nameBlurHandler,
 		reset: nameReset,
-		} = useInput(isNotEmpty);
+	} = useInput(isNotEmpty);
 
 	const {
 		value: emailValue,
@@ -39,7 +43,7 @@ const CostForm = () => {
 		inputChangeHandler: emailChangeHandler,
 		inputBlurHandler: emailBlurHandler,
 		reset: emailReset,
-		} = useInput(isEmail);
+	} = useInput(isEmail);
 
 	const {
 		value: dateValue,
@@ -76,7 +80,7 @@ const CostForm = () => {
 		inputBlurHandler: totalBlurHandler,
 		reset: totalReset,
 	} = useInput(isNotEmpty);
-	
+
 	const {
 		value: ibanValue,
 		isValid: ibanIsValid,
@@ -96,32 +100,38 @@ const CostForm = () => {
 	} = useInput(noValidate);
 
 	useEffect(() => {
-		if (nameIsValid && 
-			emailIsValid && 
-			dateIsValid && 
+		if (
+			nameIsValid &&
+			emailIsValid &&
+			dateIsValid &&
 			descriptionIsValid &&
 			purposeIsValid &&
 			totalIsValid &&
-			fileList.length > 0 && !fileError &&
+			fileList.length > 0 &&
+			!fileError &&
 			ibanIsValid &&
-			accountNameIsValid) {
+			accountNameIsValid
+		) {
 			setFormValid(true);
 		}
 		return () => setFormValid(false);
-		}, [nameIsValid, 
-			emailIsValid, 
-			dateIsValid, 
-			descriptionIsValid, 
-			purposeIsValid,
-			totalIsValid,
-			fileList, fileError,
-			ibanIsValid,
-			accountNameIsValid]);
+	}, [
+		nameIsValid,
+		emailIsValid,
+		dateIsValid,
+		descriptionIsValid,
+		purposeIsValid,
+		totalIsValid,
+		fileList,
+		fileError,
+		ibanIsValid,
+		accountNameIsValid,
+	]);
 
 	const submitHandler = (event) => {
 		event.preventDefault();
 		dispatch(costFormActions.setSubmitting());
-		console.log(event)
+		console.log(event);
 
 		if (!formValid) {
 			nameBlurHandler();
@@ -134,10 +144,8 @@ const CostForm = () => {
 			accountNameBlurHandler();
 			return;
 		} else {
-
-			
 			const formData = new FormData();
-			
+
 			formData.set('name', nameValue);
 			formData.set('email', emailValue);
 			formData.set('date', dateValue);
@@ -166,32 +174,37 @@ const CostForm = () => {
 				ibanReset();
 				accountNameReset();
 			}
-			
+
 			// event.target.submit();
 			send(dispatch, formData, resetForm);
-			
+
 			dispatch(costFormActions.resetSubmitting());
-			
-			
 		}
 	};
 
-		const nameClassNames = `${classes.formInput} ${
-			nameHasError && classes.formInputInvalid}`;
-		const emailClassNames = `${classes.formInput} ${
-			emailHasError && classes.formInputInvalid}`;
-		const dateClassNames = `${classes.formInput} ${
-			dateHasError && classes.formInputInvalid}`;
-		const descriptionClassNames = `${classes.formInput} ${
-			descriptionHasError && classes.formInputInvalid}`;
-		const purposeClassNames = `${classes.formInput} 
+	const nameClassNames = `${classes.formInput} ${
+		nameHasError && classes.formInputInvalid
+	}`;
+	const emailClassNames = `${classes.formInput} ${
+		emailHasError && classes.formInputInvalid
+	}`;
+	const dateClassNames = `${classes.formInput} ${
+		dateHasError && classes.formInputInvalid
+	}`;
+	const descriptionClassNames = `${classes.formInput} ${
+		descriptionHasError && classes.formInputInvalid
+	}`;
+	const purposeClassNames = `${classes.formInput} 
 			${purposeHasError && classes.formInputInvalid}`;
-		const totalClassNames = `${classes.formInput} ${
-			totalHasError && classes.formInputInvalid}`;
-		const ibanClassNames = `${classes.formInput} ${
-			ibanHasError && classes.formInputInvalid}`;
-		const accountNameClassNames = `${classes.formInput} ${
-			accountNameHasError && classes.formInputInvalid}`;
+	const totalClassNames = `${classes.formInput} ${
+		totalHasError && classes.formInputInvalid
+	}`;
+	const ibanClassNames = `${classes.formInput} ${
+		ibanHasError && classes.formInputInvalid
+	}`;
+	const accountNameClassNames = `${classes.formInput} ${
+		accountNameHasError && classes.formInputInvalid
+	}`;
 
 	return (
 		<section className={classes.content}>
@@ -410,11 +423,12 @@ const CostForm = () => {
 						</label>
 						<p className={classes.labelSubText}>
 							Please upload a clear picture or PDF of the receipt of the expense
-							made. Accepted file types: png, jpg, jpeg, pdf. Max file size: 5MB.
+							made. Accepted file types: png, jpg, jpeg, pdf. Max file size:
+							5MB.
 						</p>
 
-						<FileUploader 
-							selectedFile={selectedFile} 
+						<FileUploader
+							selectedFile={selectedFile}
 							setSelectedFile={setSelectedFile}
 							fileError={fileError}
 							setFileError={setFileError}
@@ -422,9 +436,7 @@ const CostForm = () => {
 							setFileList={setFileList}
 							totalFileSize={totalFileSize}
 							setTotalFileSize={setTotalFileSize}
-							/>
-
-						
+						/>
 					</fieldset>
 
 					{/* REIMBURSEMENT DETAILS  */}
