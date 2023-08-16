@@ -46,7 +46,7 @@ const FileUploader = ({selectedFile, setSelectedFile, fileError, setFileError,
                 return false
             }
 			else if (totalFileSize + fileSize > 5.5*1024*1024) {
-                setFileError('Total file size cannot exceed 30 MB');
+                setFileError('Total file size cannot exceed 5 MB');
                 setTimeout(() => setFileError(false), 3000);
                 return false
 			}
