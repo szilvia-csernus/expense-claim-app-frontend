@@ -1,21 +1,24 @@
 /* Loader styling from https://loading.io/css/ */
 
 import classes from './Loader.module.css';
+import Modal from './Modal';
 
 const Loader = () => {
 	return (
-		<div className={classes.content}>
-			<div className={classes.loader}>
-				<div></div>
-				<div></div>
-				<div></div>
-				<div></div>
-				<div></div>
-				<div></div>
-				<div></div>
-				<div></div>
+		<Modal>
+			<div className={classes.content}>
+				<div className={classes.loader}>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+				</div>
 			</div>
-		</div>
+		</Modal>
 	);
 };
 
