@@ -2,14 +2,23 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const errorMessageSlice = createSlice({
 	name: 'errorMessage',
-	initialState: false,
+	initialState: {
+		status: false,
+		message: ''
+	},
 	reducers: {
-		open() {
-			return true;
+		open(state) {
+			state.status = true;
 		},
-		close() {
-			return false;
+		close(state) {
+			state.status = false;
 		},
+		setMessage(state, action) {
+			state.message = action.payload
+		},
+		resetMessage(state) {
+			state.message = ''
+		}
 	},
 });
 

@@ -9,7 +9,7 @@ import Loader from '../Components/Loader';
 
 function Home() {
     const thankYouMessage = useSelector(state => state.thankYouMessage)
-    const errorMessage = useSelector(state => state.errorMessage)
+    const errorMessage = useSelector(state => state.errorMessage.status)
     const sending = useSelector(state => state.costForm.sending)
 
     return (

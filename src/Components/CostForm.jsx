@@ -1,11 +1,11 @@
 import classes from './Form.module.css';
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import useInput from '../Hooks/use-input';
 import { SubmitButton } from './Buttons';
 import FileUploader from './FileUploader';
 import { send } from '../store/form-action-creator';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { costFormActions } from '../store/cost-form-slice';
 
 const isNotEmpty = (value) => value.trim() !== '';
@@ -25,7 +25,6 @@ const CostForm = () => {
 	const [totalFileSize, setTotalFileSize] = useState(0);
 	
 	const dispatch = useDispatch();
-	// const formRef = useRef(null);
 
 	const {
 		value: nameValue,
@@ -70,7 +69,7 @@ const CostForm = () => {
 		inputChangeHandler: purposeChangeHandler,
 		inputBlurHandler: purposeBlurHandler,
 		reset: purposeReset,
-	} = useInput(noValidate, 'Rotterdam (4600)');
+	} = useInput(noValidate);
 
 	const {
 		value: totalValue,
@@ -131,7 +130,6 @@ const CostForm = () => {
 	const submitHandler = (event) => {
 		event.preventDefault();
 		dispatch(costFormActions.setSubmitting());
-		console.log(event);
 
 		if (!formValid) {
 			nameBlurHandler();
@@ -157,10 +155,8 @@ const CostForm = () => {
 			}
 			formData.set('iban', ibanValue);
 			formData.set('accountName', accountNameValue);
-			console.log(Object.fromEntries(formData));
 
 			function resetForm() {
-				console.log('resetting form');
 				nameReset();
 				emailReset();
 				dateReset();
@@ -175,8 +171,14 @@ const CostForm = () => {
 				accountNameReset();
 			}
 
-			// event.target.submit();
-			send(dispatch, formData, resetForm);
+			function resetFileUploader() {
+				setSelectedFile(null);
+				setFileList([]);
+				setFileError(false);
+				setTotalFileSize(0);
+			}
+
+			send(dispatch, formData, resetForm, resetFileUploader);
 
 			dispatch(costFormActions.resetSubmitting());
 		}
@@ -194,8 +196,9 @@ const CostForm = () => {
 	const descriptionClassNames = `${classes.formInput} ${
 		descriptionHasError && classes.formInputInvalid
 	}`;
-	const purposeClassNames = `${classes.formInput} 
-			${purposeHasError && classes.formInputInvalid}`;
+	const purposeClassNames = `${classes.formInput} ${
+		purposeHasError && classes.formInputInvalid
+	}`;
 	const totalClassNames = `${classes.formInput} ${
 		totalHasError && classes.formInputInvalid
 	}`;
@@ -213,10 +216,6 @@ const CostForm = () => {
 				<form
 					className={classes.form}
 					onSubmit={submitHandler}
-					// ref={formRef}
-					// encType="multipart/form-data"
-					// action="https://expenseapp.fabian.plus/rotterdam/send-email.php"
-					// method="post"
 				>
 					{/* PERSONAL INFORMATION */}
 					<fieldset>
@@ -237,6 +236,7 @@ const CostForm = () => {
 							onChange={nameChangeHandler}
 							onBlur={nameBlurHandler}
 							value={nameValue}
+							autoComplete="name"
 						/>
 						<div
 							className={
@@ -261,6 +261,7 @@ const CostForm = () => {
 							onChange={emailChangeHandler}
 							onBlur={emailBlurHandler}
 							value={emailValue}
+							autoComplete="email"
 						/>
 						<div
 							className={
@@ -346,10 +347,10 @@ const CostForm = () => {
 							onBlur={purposeBlurHandler}
 							value={purposeValue}
 						>
-							{/* <option value="" disabled>
+							<option value="" disabled defaultValue>
 								Select a purpose
 							</option>
-							<option value="Team building (4510)">Team building (4510)</option>
+							{/* <option value="Team building (4510)">Team building (4510)</option>
 							<option value="Team meals (4500)">Team meals (4500)</option>
 							<option value="Kids and Youth ministry (4460)">
 								Kids and Youth ministry (4460)
@@ -379,7 +380,7 @@ const CostForm = () => {
 							<option value="Love Delft Fund (1913)">
 								Love Delft Fund (1913)
 							</option> */}
-							<option defaultValue="Rotterdam (4600)">Rotterdam (4600)</option>
+							<option value="Rotterdam (4600)">Rotterdam (4600)</option>
 							<option value="other">other</option>
 						</select>
 
@@ -458,6 +459,7 @@ const CostForm = () => {
 							onChange={ibanChangeHandler}
 							onBlur={ibanBlurHandler}
 							value={ibanValue}
+							autoComplete="on"
 						/>
 						<div
 							className={

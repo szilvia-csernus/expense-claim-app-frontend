@@ -31,7 +31,6 @@ const FileUploader = ({selectedFile, setSelectedFile, fileError, setFileError,
     
 
     const fileUploadIsValid = (file) => {
-        console.log(totalFileSize)
 			const fileTypes = [
 				'image/png',
 				'image/jpeg',
@@ -84,13 +83,14 @@ const FileUploader = ({selectedFile, setSelectedFile, fileError, setFileError,
 			<>
 				{showFileList}
 				<input
+                id='receipts'
                 type="file"
                 name="receipts"
                 accept="image/png, image/jpeg, image/jpg, application/pdf"
                 className={receiptsClassNames}
                 onChange={handleFileInput}
                 onClick={handleOnClick}
-            />
+                />
 				<div
 					className={
 						fileError ? classes.feedbackInvalid : classes.feedbackValid
