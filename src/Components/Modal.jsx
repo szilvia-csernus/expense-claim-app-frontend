@@ -7,7 +7,7 @@ import classes from './Modal.module.css';
 
 const Backdrop = () => {
 	const thankYouMessage = useSelector((state) => state.thankYouMessage);
-	const errorMessage = useSelector((state) => state.errorMessage);
+	const errorMessage = useSelector((state) => state.errorMessage.status);
 
 	const dispatch = useDispatch();
 	

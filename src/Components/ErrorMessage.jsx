@@ -1,19 +1,22 @@
 import classes from './Form.module.css';
 import { NewFormButton } from './Buttons';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { errorMessageActions } from '../store/error-message-slice';
 import Modal from './Modal';
 
 const ErrorMessage = () => {
 	const dispatch = useDispatch();
+	const message = useSelector(state => state.errorMessage.message)
 	const clickHandler = () => {
 		dispatch(errorMessageActions.close());
+		dispatch(errorMessageActions.resetMessage());
 	};
+	
 	return (
 		<Modal>
 			<div className={classes.messageContent}>
-				<h2>An error occured while sending the form.</h2>
-				<p>Apologies for the inconvenience!</p>
+				<h2>ERROR</h2>
+				<p>{message}</p>
 				<br />
 				<br />
 				<NewFormButton clickHandler={clickHandler}>
