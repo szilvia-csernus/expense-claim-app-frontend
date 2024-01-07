@@ -20,7 +20,8 @@ export const send = async (dispatch, formData, resetForm, resetFileUploader) => 
 			method: 'POST',
 			body: formData,
 		}
-	).then(
+	)
+	.then(
 		(response) => {
 			if (response.status === 200) {
 				dispatch(costFormActions.resetSending());

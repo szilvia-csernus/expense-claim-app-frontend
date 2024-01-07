@@ -1,27 +1,41 @@
 .button {
     display: inline-block;
     font-weight: var(--button-font-weight);
+    cursor: pointer;
 }
 
 .button:hover,
 .button:focus,
 .button:active {
-    cursor: pointer;
     background-color: var(--button-hover-color);
 }
 
-.submitButton {
+.primaryButton {
     padding: .55rem 1.4rem;
     border-radius: 1.4rem;
     color: var(--invert-text-color);
     background-color: var(--button-color);
-    border-color: var(--button-border-color);
+    border: 1px solid var(--button-border-color);
 }
 
-.submitButton:hover,
-.submitButton:focus,
-.submitButton:active {
+.primaryButton:hover,
+.primaryButton:focus,
+.primaryButton:active {
     background-color: var(--button-hover-color);
+}
+
+.secondaryButton {
+    padding: .55rem 1.4rem;
+    border-radius: 1.4rem;
+    color: var(--invert-text-color);
+    border: 1px solid var(--button-border-color);
+}
+
+.secondaryButton:hover,
+.secondaryButton:focus,
+.secondaryButton:active {
+    background-color: var(--button-hover-color);
+    
 }
 
 .deleteButton {

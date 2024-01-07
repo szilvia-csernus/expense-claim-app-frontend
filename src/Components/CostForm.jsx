@@ -5,8 +5,10 @@ import useInput from '../Hooks/use-input';
 import { SubmitButton } from './Buttons';
 import FileUploader from './FileUploader';
 import { send } from '../store/form-action-creator';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { costFormActions } from '../store/cost-form-slice';
+import { selectChurchActions } from '../store/select-church-slice';
+import purposes from '../data/purposes.json';
 
 const isNotEmpty = (value) => value.trim() !== '';
 const isEmail = (value) =>
@@ -23,8 +25,15 @@ const CostForm = () => {
 	const [fileError, setFileError] = useState(false);
 	const [fileList, setFileList] = useState([]);
 	const [totalFileSize, setTotalFileSize] = useState(0);
+
+	const churchValue = useSelector(state => state.selectChurch.church);
 	
 	const dispatch = useDispatch();
+
+	const handleSelectChurch = () => {
+		dispatch(selectChurchActions.open())
+		purposeReset();
+	}
 
 	const {
 		value: nameValue,
@@ -69,7 +78,7 @@ const CostForm = () => {
 		inputChangeHandler: purposeChangeHandler,
 		inputBlurHandler: purposeBlurHandler,
 		reset: purposeReset,
-	} = useInput(noValidate);
+	} = useInput(isNotEmpty);
 
 	const {
 		value: totalValue,
@@ -144,6 +153,7 @@ const CostForm = () => {
 		} else {
 			const formData = new FormData();
 
+			formData.set('church', churchValue);
 			formData.set('name', nameValue);
 			formData.set('email', emailValue);
 			formData.set('date', dateValue);
@@ -183,7 +193,7 @@ const CostForm = () => {
 			dispatch(costFormActions.resetSubmitting());
 		}
 	};
-
+	
 	const nameClassNames = `${classes.formInput} ${
 		nameHasError && classes.formInputInvalid
 	}`;
@@ -213,10 +223,7 @@ const CostForm = () => {
 		<section className={classes.content}>
 			<h1 className={classes.header}>Expense Form</h1>
 			<div className={classes.body}>
-				<form
-					className={classes.form}
-					onSubmit={submitHandler}
-				>
+				<form className={classes.form} onSubmit={submitHandler}>
 					{/* PERSONAL INFORMATION */}
 					<fieldset>
 						<h2>Personal Information</h2>
@@ -275,11 +282,61 @@ const CostForm = () => {
 					{/* EXPENSES */}
 					<fieldset>
 						<h2>Expenses</h2>
-						{/* <p className={classes.labelSubText}>
-							You can submit any number of receipts and sum them up in one
-							Expense Form, but please collect different purposes into separate
-							submissions, to help making our bookkeeping transparent.
-						</p> */}
+
+						{/* Selected Church  */}
+						<p className={classes.labelSubText}>
+							Your Selected Church is <strong>{churchValue}</strong>. Is this
+							not your church?{' '}
+							<a onClick={handleSelectChurch} className={classes.linkText}>
+								Change it here.
+							</a>
+						</p>
+
+						{/* Purpose  */}
+						<div htmlFor="purpose" className={classes.labelText}>
+							Purpose *
+						</div>
+						<p className={classes.labelSubText}>
+							Please select a purpose for the expense.
+						</p>
+						<select
+							id="purpose"
+							type="text"
+							name="purpose"
+							className={purposeClassNames}
+							onChange={purposeChangeHandler}
+							onBlur={purposeBlurHandler}
+							value={purposeValue}
+						>
+							<option value="" disabled defaultValue>
+								Select a purpose
+							</option>
+							{churchValue === 'Delft' &&
+								purposes['Delft'].map((purpose, idx) => (
+									<option key={purpose + idx} value={purpose}>
+										{purpose}
+									</option>
+								))}
+							{churchValue === 'Rotterdam' &&
+								purposes['Rotterdam'].map((purpose, idx) => (
+									<option key={purpose + idx} value={purpose}>
+										{purpose}
+									</option>
+								))}
+							<option disabled={churchValue === ''} value="other">
+								other
+							</option>
+						</select>
+
+						<div
+							className={
+								purposeHasError
+									? classes.feedbackInvalid
+									: classes.feedbackValid
+							}
+						>
+							Please select a purpose.
+						</div>
 
 						{/* Date  */}
 						<label htmlFor="date" className={classes.labelText}>
@@ -304,14 +361,16 @@ const CostForm = () => {
 								dateHasError ? classes.feedbackInvalid : classes.feedbackValid
 							}
 						>
-							Invalid date.
+							Please select a date.
 						</div>
 
 						{/* Description  */}
 						<label htmlFor="description" className={classes.labelText}>
 							Description *
 						</label>
-						<p className={classes.labelSubText}>Short title for the expense.</p>
+						<p className={classes.labelSubText}>
+							Short description for the expense.
+						</p>
 						<input
 							id="description"
 							type="text"
@@ -329,69 +388,6 @@ const CostForm = () => {
 							}
 						>
 							Please provide a short description.
-						</div>
-
-						{/* Purpose  */}
-						<div htmlFor="purpose" className={classes.labelText}>
-							Purpose *
-						</div>
-						<p className={classes.labelSubText}>
-							Select one option for the goal of the expense.
-						</p>
-						<select
-							id="purpose"
-							type="text"
-							name="purpose"
-							className={purposeClassNames}
-							onChange={purposeChangeHandler}
-							onBlur={purposeBlurHandler}
-							value={purposeValue}
-						>
-							<option value="" disabled defaultValue>
-								Select a purpose
-							</option>
-							{/* <option value="Team building (4510)">Team building (4510)</option>
-							<option value="Team meals (4500)">Team meals (4500)</option>
-							<option value="Kids and Youth ministry (4460)">
-								Kids and Youth ministry (4460)
-							</option>
-							<option value="Audiovisual equipments (4450)">
-								Audiovisual equipments (4450)
-							</option>
-							<option value="Meeting venue decoration (4415)">
-								Meeting venue decoration (4415)
-							</option>
-							<option value="Meeting catering (4410)">
-								Meeting catering (4410)
-							</option>
-							<option value="Advertising (4310)">Advertising (4310)</option>
-							<option value="Training / Conference Fees (4250)">
-								Training / Conference Fees (4250)
-							</option>
-							<option value="Software subscription (4116)">
-								Software subscription (4116)
-							</option>
-							<option value="Transport costs (4108)">
-								Transport costs (4108)
-							</option>
-							<option value="Love People Fund (1910)">
-								Love People Fund (1910)
-							</option>
-							<option value="Love Delft Fund (1913)">
-								Love Delft Fund (1913)
-							</option> */}
-							<option value="Rotterdam (4600)">Rotterdam (4600)</option>
-							<option value="other">other</option>
-						</select>
-
-						<div
-							className={
-								purposeHasError
-									? classes.feedbackInvalid
-									: classes.feedbackValid
-							}
-						>
-							Please select a purpose.
 						</div>
 
 						{/* Total  */}

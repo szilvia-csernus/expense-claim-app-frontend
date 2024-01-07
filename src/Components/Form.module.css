@@ -52,7 +52,6 @@
 }
 
 .fileInputField {
-    /* height: 120px; */
     border-style: dashed;
     color: transparent;
     border: none;
@@ -101,4 +100,9 @@
     padding: .2rem 2rem 2rem 2rem;
     background-color: var(--main-bg-color);
     border-radius: .5rem;
+}
+
+.linkText {
+    cursor: pointer;
+    text-decoration: underline;
 }

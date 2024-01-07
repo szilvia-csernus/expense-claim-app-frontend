@@ -1,5 +1,5 @@
 import classes from './Form.module.css';
-import { NewFormButton } from './Buttons';
+import { SecondaryButton } from './Buttons';
 import { useDispatch } from 'react-redux';
 import { thankYouMessageActions } from '../store/thank-you-message-slice';
 import Modal from './Modal';
@@ -16,7 +16,7 @@ const ThankYouMessage = () => {
 				<p>Thank you!</p>
 				<br />
 				<br />
-				<NewFormButton clickHandler={clickHandler}>New Form</NewFormButton>
+				<SecondaryButton onClick={clickHandler}>New Form</SecondaryButton>
 			</div>
 		</Modal>
 	);

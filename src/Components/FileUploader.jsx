@@ -24,7 +24,7 @@ const FileUploader = ({selectedFile, setSelectedFile, fileError, setFileError,
     useEffect(() => {
         if (submitting) {
             if (fileList.length === 0) {
-            setFileError('Please upload a file')
+            setFileError('Please upload a picture of the receipt.')
             }
         }
     }, [submitting, fileList, setFileError, totalFileSize])
