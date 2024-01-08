@@ -323,9 +323,6 @@ const CostForm = () => {
 										{purpose}
 									</option>
 								))}
-							<option disabled={churchValue === ''} value="other">
-								other
-							</option>
 						</select>
 
 						<div

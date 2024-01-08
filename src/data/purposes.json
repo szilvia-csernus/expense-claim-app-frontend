@@ -12,10 +12,12 @@
             "Software subscription (4116)",
             "Transport costs (4108)",
             "Love People Fund (1910)",
-            "Love Delft Fund (1913)"
+            "Love Delft Fund (1913)",
+            "Other"
         ],
     "Rotterdam":
         [
-            "Rotterdam (4600)"
+            "Rotterdam (4600)",
+            "Other"
         ]
 }
