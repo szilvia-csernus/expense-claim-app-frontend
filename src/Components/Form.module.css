@@ -44,6 +44,7 @@
 .feedbackInvalid {
     color: rgb(248, 60, 60);
     font-size: .9rem;
+    margin-top: .5rem;
     margin-bottom: 1rem;
 }
 
@@ -52,11 +53,7 @@
 }
 
 .fileInputField {
-    border-style: dashed;
-    color: transparent;
-    border: none;
-    background-color: transparent;
-    padding: 0;
+    max-width: 150px;
 }
 
 /* Hiding the custom file upload button because the OS-controlled small picture's behaviour
@@ -66,7 +63,12 @@ is inconsistent with the React-controlled component. */
     display: none;
 }
 
+.uploadButtonFrame {
+    margin: .5rem 0 1rem;
+}
+
 .customFileUploadButton {
+    display: inline;
     background-color: transparent;
     margin: .5rem 0 1rem;
     padding: .55rem 1.4rem;
@@ -78,21 +80,10 @@ is inconsistent with the React-controlled component. */
     border-radius: 1.4rem;
 }
 
-/* .fileInputField::-webkit-file-upload-button:hover,
-.input[type="file"]::file-selector-button:hover {
-    background-color: var(--button-color);
-    color: var(--invert-text-color);
-} */
-
 .customFileUploadButton:hover {
     background-color: var(--button-color);
     color: var(--invert-text-color);
 }
-
-/* .fileInputInvalid::-webkit-file-upload-button,
-.input[type="file"]::file-selector-button {
-    border-color: var(--danger-color);
-} */
 
 .fileInputInvalid {
     border-color: var(--danger-color);

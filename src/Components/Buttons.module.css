@@ -47,7 +47,7 @@
 }
 
 .deleteButton:hover,
-.deleteButton:focus,
+/* .deleteButton:focus, */
 .deleteButton:active {
     background-color: var(--danger-color);
     color: var(--invert-text-color);
