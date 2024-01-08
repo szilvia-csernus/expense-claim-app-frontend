@@ -82,6 +82,8 @@ const FileUploader = ({selectedFile, setSelectedFile, fileError, setFileError,
     return (
 			<>
 				{showFileList}
+                <br />
+                <label htmlFor="receipts" className={classes.customFileUploadButton}>Choose file</label>
 				<input
                 id='receipts'
                 type="file"
