@@ -293,9 +293,9 @@ const CostForm = () => {
 						</p>
 
 						{/* Purpose  */}
-						<div htmlFor="purpose" className={classes.labelText}>
+						<label htmlFor="purpose" className={classes.labelText}>
 							Purpose *
-						</div>
+						</label>
 						<p className={classes.labelSubText}>
 							Please select a purpose for the expense.
 						</p>
@@ -412,9 +412,9 @@ const CostForm = () => {
 						</div>
 
 						{/* Receipts  */}
-						<label htmlFor="receipts" className={classes.labelText}>
+						<span className={classes.labelText}>
 							Receipt(s) *
-						</label>
+						</span>
 						<p className={classes.labelSubText}>
 							Please upload a clear picture or PDF of the receipt of the expense
 							made. Accepted file types: png, jpg, jpeg, pdf. Max file size:
