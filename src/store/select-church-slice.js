@@ -1,6 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialChurch = localStorage.getItem('church');
+function getInitialChurch() {
+	const params = new URLSearchParams(window.location.search);
+	const adm = params.get('adm');
+	const localChurch = localStorage.getItem('church');
+	return adm !== null ? adm : localChurch;
+}
+
+const initialChurch = getInitialChurch();
 const initialStatus = ( initialChurch === null || initialChurch === '');
 
 const selectChurchSlice = createSlice({
