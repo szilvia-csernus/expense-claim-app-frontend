@@ -2,6 +2,7 @@
     display: inline-block;
     font-weight: var(--button-font-weight);
     cursor: pointer;
+    transition: background-color 0.6s;
 }
 
 .button:hover,
@@ -16,6 +17,7 @@
     color: var(--invert-text-color);
     background-color: var(--button-color);
     border: 1px solid var(--button-border-color);
+    transition: background-color 0.6s;
 }
 
 .primaryButton:hover,
@@ -27,15 +29,16 @@
 .secondaryButton {
     padding: .55rem 1.4rem;
     border-radius: 1.4rem;
-    color: var(--input-text-color);;
+    color: var(--input-text-color);
     border: 1px solid var(--button-border-color);
+    transition: background-color 0.6s;
 }
 
 .secondaryButton:hover,
 .secondaryButton:focus,
 .secondaryButton:active {
     background-color: var(--button-hover-color);
-    
+    color: var(--invert-text-color);
 }
 
 .deleteButton {
@@ -44,6 +47,7 @@
     margin: 0 .5rem .5rem 0;
     color: var(--main-title-color);
     border: 1px solid var(--main-title-color);
+    transition: background-color 0.6s;
 }
 
 .deleteButton:hover,
