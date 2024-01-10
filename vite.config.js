@@ -8,6 +8,11 @@ import svgr from 'vite-plugin-svgr'
 
 export default defineConfig(() => {
 	return {
+		root: './',
+		publicDir: 'public',
+		server: {
+			host: '0.0.0.0', // listen on all network interfaces - required for Docker
+		},
 		build: {
 			outDir: 'build',
 		},
@@ -37,15 +42,15 @@ export default defineConfig(() => {
 							urlPattern: /^https:\/\/fonts\.gstatic\.com\/.*/i,
 							handler: 'CacheFirst',
 							options: {
-							cacheName: 'gstatic-fonts-cache',
-							expiration: {
-								maxEntries: 10,
-								maxAgeSeconds: 60 * 60 * 24 * 365 // <== 365 days
+								cacheName: 'gstatic-fonts-cache',
+								expiration: {
+									maxEntries: 10,
+									maxAgeSeconds: 60 * 60 * 24 * 365, // <== 365 days
+								},
+								cacheableResponse: {
+									statuses: [0, 200],
+								},
 							},
-							cacheableResponse: {
-								statuses: [0, 200]
-							},
-							}
 						},
 						{
 							urlPattern: /^https:\/\/www\.redeemerdelft\.nl\/.*/i,
@@ -67,9 +72,11 @@ export default defineConfig(() => {
 					enabled: true,
 				},
 			}),
-			svgr({ svgrOptions: { 
-				// svgr options 
-			}, }), 
+			svgr({
+				svgrOptions: {
+					// svgr options
+				},
+			}),
 		],
 		workbox: {
 			globPatterns: ['**/*.{js,css,html,svg,png}'],

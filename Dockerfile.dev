@@ -1,0 +1,39 @@
+FROM node:18.19.0-buster
+
+WORKDIR /app
+
+COPY package.json .
+COPY package-lock.json .
+COPY vite.config.js .
+
+RUN npm install
+
+COPY src ./src
+COPY public ./public
+COPY index.html .
+
+
+CMD ["npm", "start"]
+
+# build this image with the following command:
+# docker build -f Dockerfile.dev -t expense-app-frontend:1.0.0-dev .
+
+# run this container:
+# docker container run -d --rm -it --name web -p 5173:5173 -v ${PWD}/src:/app/src expense-app-frontend:1.0.0-dev
+# -d              - detached mode
+# --rm            - remove the container after it stopped running
+# -it             - interactive terminal
+# --name web      - let's  name to this container 'web'
+# -p 5173:5173    - redirect the incoming requests for port 5173 to our container's port 5173
+# -v ${PWD}/src:/app/src  - bind mount: map the working directory's src folder to the docker image's src folder, so that it updates any changes during the development process
+
+
+# to stop the container:
+# docker stop web
+
+# entering the container's shell:
+# docker exec -it web bash
+# ...:/app# ls
+# ...:/app# exit
+
+
