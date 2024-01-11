@@ -35,6 +35,6 @@ CMD ["nginx", "-g", "daemon off;"]
 # -d              - detached mode
 # --rm            - remove the container after it stopped running
 # -it             - interactive terminal
-# --name webP     - let's  name to this container 'web'
+# --name webP     - let's  name this container 'webP'
 # -p 5174:80      - redirect the incoming requests for local port 5174 to our container's port 80, the default nginx port number.
 
