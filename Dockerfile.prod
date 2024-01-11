@@ -18,13 +18,15 @@ RUN npm run build
 
 
 # NGINX web server
-FROM nginx:1.12.0-alpine AS prod
+FROM nginx:1.25.3-alpine3.18-slim AS prod
 
 COPY --from=build /app/build /usr/share/nginx/html
 
 EXPOSE 80
 
-CMD ["nginx", "-g", "daemon off;"]
+# nginx recommends to add "-g daemon off;" to the CMD command so that nginx stays in the foreground. For more info:
+# https://hub.docker.com/_/nginx
+CMD ["nginx", "-g daemon off;"]
 
 
 # build this image with the following command:
@@ -38,3 +40,7 @@ CMD ["nginx", "-g", "daemon off;"]
 # --name webP     - let's  name this container 'webP'
 # -p 5174:80      - redirect the incoming requests for local port 5174 to our container's port 80, the default nginx port number.
 
+# to stop the container:
+# docker stop webP
+
+# Note: This build is lightweight, ~12MB, there is no bash shell in this alpine version of nginx!
