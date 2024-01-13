@@ -57,9 +57,10 @@ html {
     --main-bg-color: rgb(255, 255, 255);
     --input-border-color: #e1e1e1;
     --input-bg-color: #f3f3f3;
-    --input-text-color: #7c7c7c;
+    --input-text-color: #767676;
     --primary-color: #009300;
-    --button-color: #008100;
+    /* --button-color: #008100; */
+    --button-color: linear-gradient(150deg, #006d81, #57d9ad);
     --button-border-color: #008100;
     --button-hover-color: #006800;
     --invert-text-color: white;
