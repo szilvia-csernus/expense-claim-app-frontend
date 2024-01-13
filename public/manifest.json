@@ -35,12 +35,6 @@
 				"purpose": "any"
 			},
 			{
-				"src": "android-192x192.png",
-				"type": "image/png",
-				"sizes": "192x192",
-				"purpose": "any"
-			},
-			{
 				"src": "android-chrome-192x192.png",
 				"type": "image/png",
 				"sizes": "192x192",
@@ -53,13 +47,13 @@
 				"purpose": "any"
 			},
 			{
-				"src": "android-chrome-maskable-192x192.png",
+				"src": "android-chrome-192x192.png",
 				"type": "image/png",
 				"sizes": "192x192",
 				"purpose": "maskable"
 			},
 			{
-				"src": "android-chrome-maskable-512x512.png",
+				"src": "android-chrome-512x512.png",
 				"type": "image/png",
 				"sizes": "512x512",
 				"purpose": "maskable"
