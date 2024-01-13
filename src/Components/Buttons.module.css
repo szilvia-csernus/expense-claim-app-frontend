@@ -12,32 +12,64 @@
 }
 
 .primaryButton {
-    padding: .55rem 1.4rem;
+    position: relative;
+    padding: .7rem 2.3rem;
     border-radius: 1.4rem;
     color: var(--invert-text-color);
-    background-color: var(--button-color);
-    border: 1px solid var(--button-border-color);
+    background: var(--button-color);
+    border: 1px solid transparent;
     transition: background-color 0.6s;
+    overflow: hidden;
+    z-index: 1;
 }
 
-.primaryButton:hover,
-.primaryButton:focus,
-.primaryButton:active {
-    background-color: var(--button-hover-color);
+.primaryButton:before {
+    content: "";
+    position: absolute;
+    top: -2px; right: -2px; bottom: -2px; left: -2px; /* 1px more than border width */
+    background-color: var(--button-color);
+    border-radius: inherit; /* match border radius */
+    transition: background-color 0.6s;
+    z-index: -1;
+}
+
+.primaryButton:hover::before {
+    background-color: var(--main-bg-color);
+}
+
+.primaryButton:hover {
+    color: var(--input-text-color);
 }
 
 .secondaryButton {
+    position: relative;
+    background: var(--button-color);
     padding: .55rem 1.4rem;
     border-radius: 1.4rem;
     color: var(--input-text-color);
-    border: 1px solid var(--button-border-color);
+    border: 1px solid transparent;
     transition: background-color 0.6s;
+    overflow: hidden;
+    z-index: 1;
 }
 
-.secondaryButton:hover,
-.secondaryButton:focus,
-.secondaryButton:active {
-    background-color: var(--button-hover-color);
+/* The colour-gradient border is achievebla with this "hack": we are adding a pseudo-element
+that has a slightly smaller surface and we apply the background-color to it. */
+.secondaryButton:before {
+    content: "";
+    position: absolute;
+    top: -2px; right: -2px; bottom: -2px; left: -2px; /* 1px more than border width */
+    background-color: var(--main-bg-color);
+    border-radius: inherit; /* match border radius */
+    transition: background-color 0.6s;
+    z-index: -1;
+}
+
+.secondaryButton:hover::before {
+    background-color: var(--button-color);
+}
+
+.secondaryButton:hover {
     color: var(--invert-text-color);
 }
 
