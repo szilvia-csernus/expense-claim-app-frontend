@@ -94,7 +94,7 @@ const FileUploader = ({
 			<br />
 			<div className={classes.uploadButtonFrame}>
 				<label htmlFor="receipts" className={receiptsClassNames}>
-					Choose file
+					Add Photo
 				</label>
 			</div>
 			<input

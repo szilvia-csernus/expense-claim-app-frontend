@@ -14,16 +14,14 @@ const SelectChurch = () => {
 		<Modal>
 			<div className={classes.messageContent}>
 				<h2>Select Your Church</h2>
-				<br />
 				<div>
 					<SecondaryButton onClick={clickHandler}>Delft</SecondaryButton>
 				</div>
 				<br />
 				<div>
-					<SecondaryButton onClick={clickHandler}>
-						Rotterdam
-					</SecondaryButton>
+					<SecondaryButton onClick={clickHandler}>Rotterdam</SecondaryButton>
 				</div>
+				<br />
 			</div>
 		</Modal>
 	);

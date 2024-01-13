@@ -23,7 +23,7 @@
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: var(--primary-color);
+  background: var(--secondary-color);
   margin: -4px 0 0 -4px;
 }
 .loader div:nth-child(1) {
