@@ -12,9 +12,10 @@ const ThankYouMessage = () => {
 	return (
 		<Modal>
 			<div className={classes.messageContent}>
-				<h2>Your Expense form has been sent successfully.</h2>
-				<p>Thank you!</p>
+				<h2>Thank you!</h2>
+				<p>Your Expense Form has been sent successfully.</p>
 				<br />
+
 				<br />
 				<SecondaryButton onClick={clickHandler}>New Form</SecondaryButton>
 			</div>

@@ -1,7 +1,11 @@
 .content {
     display: block;
     margin: auto;
-    padding: 2rem;
+    padding: 3rem 1rem 5rem 1rem;
+    background-color: var(--main-bg-color);
+    margin: 1rem;
+    border: 1px solid var(--input-bg-color);
+    border-radius: .2rem;;
 }
 
 .content::-webkit-scrollbar{
@@ -88,7 +92,7 @@ is inconsistent with the React-controlled component. */
 .customFileUploadButton:before {
     content: "";
     position: absolute;
-    top: -2px; right: -2px; bottom: -2px; left: -2px; /* match border width */
+    top: -2px; right: -2px; bottom: -2px; left: -2px; /* 1px more than border width */
     background: var(--button-color);
     border-radius: inherit; /* match border radius */
     z-index: -1;
@@ -120,9 +124,16 @@ is inconsistent with the React-controlled component. */
     padding: .2rem 2rem 2rem 2rem;
     background-color: var(--main-bg-color);
     border-radius: .5rem;
+    border: 1px solid var(--input-bg-color);
 }
 
 .linkText {
     cursor: pointer;
     text-decoration: underline;
+}
+
+.churchLogo {
+    height: 60px;
+    width: auto;
+    display: block;
 }

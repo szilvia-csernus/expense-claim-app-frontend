@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { costFormActions } from '../store/cost-form-slice';
 import { selectChurchActions } from '../store/select-church-slice';
 import purposes from '../data/purposes.json';
+import ChurchLogo from './ChurchLogo';
 
 const isNotEmpty = (value) => value.trim() !== '';
 const isEmail = (value) =>
@@ -221,7 +222,9 @@ const CostForm = () => {
 
 	return (
 		<section className={classes.content}>
-			<h1 className={classes.header}>Expense Form</h1>
+			
+			<ChurchLogo />
+			<br />
 			<div className={classes.body}>
 				<form className={classes.form} onSubmit={submitHandler}>
 					{/* PERSONAL INFORMATION */}
@@ -412,11 +415,9 @@ const CostForm = () => {
 						</div>
 
 						{/* Receipts  */}
-						<span className={classes.labelText}>
-							Receipt(s) *
-						</span>
+						<span className={classes.labelText}>Receipt(s) *</span>
 						<p className={classes.labelSubText}>
-							Please upload a clear picture or PDF of the receipt of the expense
+							Please take/upload a clear picture or PDF of the receipt of the expense
 							made. Accepted file types: png, jpg, jpeg, pdf. Max file size:
 							5MB.
 						</p>
@@ -489,7 +490,8 @@ const CostForm = () => {
 							Invalid name.
 						</div>
 					</fieldset>
-
+					
+					<br />
 					<div className={classes.footer}>
 						<SubmitButton type="submit">Submit</SubmitButton>
 					</div>
