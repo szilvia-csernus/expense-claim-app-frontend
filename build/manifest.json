@@ -1,7 +1,7 @@
 {
-    "short_name": "Redeemer - Cost Claim",
-    "name": "Redeemer - Expense Reimbursement",
-    "description": "Expense Reimbursement for Redeemer Church, Rotterdam, NL",
+    "short_name": "Expense App",
+    "name": "Expense App for Redeemer Churches",
+    "description": "Expense Reimbursement App for Redeemer Churches in the Neatherlands",
     "lang": "en-US",
     "icons": [
 			{
