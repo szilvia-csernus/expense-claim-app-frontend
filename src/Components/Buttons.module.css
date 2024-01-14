@@ -5,12 +5,6 @@
     transition: background-color 0.6s;
 }
 
-.button:hover,
-.button:focus,
-.button:active {
-    background-color: var(--button-hover-color);
-}
-
 .primaryButton {
     position: relative;
     padding: .7rem 2.3rem;
