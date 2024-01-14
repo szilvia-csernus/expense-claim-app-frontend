@@ -1,6 +1,8 @@
 import { errorMessageActions } from '../store/error-message-slice';
 import { thankYouMessageActions } from '../store/thank-you-message-slice';
 import { costFormActions } from './cost-form-slice';
+import rotterdamLogoUrl from '../images/rotterdamLogo.png';
+import delftLogoUrl from '../images/delftLogo.png';
 
 function closeAfterTimeout(dispatch) {
 	function timeout() {setTimeout(() => {
@@ -12,8 +14,28 @@ function closeAfterTimeout(dispatch) {
 	return clearTimeout(timeout);
 }
 
+const fetchAndAppendChurchLogo = async (formData) => {
+	const church = formData.get('church');
+	if (church === 'Rotterdam') {
+		return fetch(rotterdamLogoUrl)
+			.then((response) => response.blob())
+			.then((blob) => {
+				formData.append('logo', blob, 'logo.png');
+			});
+	} else if (church === 'Delft') {
+		return fetch(delftLogoUrl)
+			.then((response) => response.blob())
+			.then((blob) => {
+				formData.append('logo', blob, 'logo.png');
+			});
+	}
+};
+
 export const send = async (dispatch, formData, resetForm, resetFileUploader) => {
 	dispatch(costFormActions.setSending());
+
+	await fetchAndAppendChurchLogo(formData);
+
 	const result = await fetch(
 		'https://expenseapp.fabian.plus/rotterdam/send-email.php',
 		{
