@@ -37,7 +37,7 @@ export const send = async (dispatch, formData, resetForm, resetFileUploader) => 
 	await fetchAndAppendChurchLogo(formData);
 
 	const result = await fetch(
-		'https://expenseapp.fabian.plus/rotterdam/send-email.php',
+		'https://expenseapp.fabian.plus/send-email.php',
 		{
 			method: 'POST',
 			body: formData,
