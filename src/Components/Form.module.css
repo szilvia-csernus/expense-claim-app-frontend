@@ -61,14 +61,18 @@
 }
 
 /* Hiding the custom file upload button because the OS-controlled small picture's behaviour
-is inconsistent with the React-controlled component. */
+is inconsistent with the React-controlled component.*/
 .fileInputField::-webkit-file-upload-button,
-.input[type="file"]::file-selector-button {
+.fileInputField[type="file"]::file-selector-button {
+    display: none;
+}
+.fileInputField[type="file"] {
     display: none;
 }
 
+
 .uploadButtonFrame {
-    margin: .5rem 0 1rem;
+    margin: .5rem 0 3rem;
 }
 
 .customFileUploadButton {
