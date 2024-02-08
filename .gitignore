@@ -13,6 +13,7 @@
 .firebase
 .firebaserc
 firebase.json
+.github
 
 # misc
 .DS_Store
