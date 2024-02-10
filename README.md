@@ -11,10 +11,6 @@ Open [http://localhost:5173](http://localhost:5173) to view it in your browser.
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
 ### `npm run build`
 
@@ -27,8 +23,9 @@ Your app is ready to be deployed!
 
 ### Deployment
 
-This app is deployed on firebase.
+This app is deployed on Firebase, using Github Actions.
 
+The build folder can be served with one command from the cli: `firebase deploy`
 
 
 ## Credits
