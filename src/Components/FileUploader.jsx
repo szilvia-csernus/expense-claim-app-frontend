@@ -53,7 +53,7 @@ const FileUploader = ({
 			setTimeout(() => setFileError(false), 3000);
 			return false;
 		} else if (totalFileSize + fileSize > 5.5 * 1024 * 1024) {
-			setFileError('Total file size cannot exceed 5 MB');
+			setFileError('Total file upload cannot exceed 5 MB');
 			setTimeout(() => setFileError(false), 5000);
 			return false;
 		}
@@ -81,7 +81,9 @@ const FileUploader = ({
 						<DeleteButton onClick={() => removeFileFromList(file)}>
 							X
 						</DeleteButton>
-						{file.name} - {(file.size / 1024).toFixed(0)} kB
+						{file.size < 1024 * 1024
+							? `${(file.size / 1024).toFixed(0)} kB`
+							: `${(file.size / 1024 / 1024).toFixed(2)} MB`}
 					</li>
 				);
 			})}
