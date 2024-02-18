@@ -439,7 +439,7 @@ const CostForm = () => {
 
 					{/* REIMBURSEMENT DETAILS  */}
 					<fieldset>
-						<h2>Reimbursement Details</h2>
+						<h2>Reimbursement Details (optional)</h2>
 						{/* Bank Account  */}
 						<label htmlFor="iban" className={classes.labelText}>
 							Bank Account Number (IBAN)
