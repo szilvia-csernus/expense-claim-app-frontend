@@ -97,7 +97,7 @@ const CostForm = () => {
 		inputChangeHandler: ibanChangeHandler,
 		inputBlurHandler: ibanBlurHandler,
 		reset: ibanReset,
-	} = useInput(isNotEmpty);
+	} = useInput(noValidate);
 
 	const {
 		value: accountNameValue,
@@ -421,7 +421,8 @@ const CostForm = () => {
 						<span className={classes.labelText}>Receipt(s) *</span>
 						<p className={classes.labelSubText}>
 							Please take/upload a clear picture or PDF of the receipt of the
-							expense made. Accepted file types: png, jpg, jpeg, pdf. Max upload: 5MB.
+							expense made. Accepted file types: png, jpg, jpeg, pdf. Max
+							upload: 5MB.
 						</p>
 
 						<FileUploader
@@ -441,11 +442,11 @@ const CostForm = () => {
 						<h2>Reimbursement Details</h2>
 						{/* Bank Account  */}
 						<label htmlFor="iban" className={classes.labelText}>
-							Bank Account *
+							Bank Account Number (IBAN)*
 						</label>
 						<p className={classes.labelSubText}>
-							The IBAN account number, where the reimbursement is to be
-							transferred.
+							If you are not a regular donor of our church, then please give us
+							an IBAN where we can send you the reimbursement.
 						</p>
 						<input
 							id="iban"
