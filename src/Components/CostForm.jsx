@@ -442,7 +442,7 @@ const CostForm = () => {
 						<h2>Reimbursement Details</h2>
 						{/* Bank Account  */}
 						<label htmlFor="iban" className={classes.labelText}>
-							Bank Account Number (IBAN)*
+							Bank Account Number (IBAN)
 						</label>
 						<p className={classes.labelSubText}>
 							If you are not a regular donor of our church, then please give us
